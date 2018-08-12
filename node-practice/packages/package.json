@@ -1,0 +1,19 @@
+{
+  "name": "liaoliao-package",
+  "version": "1.0.0",
+  "description": "了了学习包怎么用",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "lodash": "^4.17.10",
+    "moment": "^2.22.2"
+  },
+  "devDependencies": {
+    "jquery": "^3.3.1"
+  }
+}
