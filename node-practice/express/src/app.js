@@ -18,6 +18,9 @@ app.use(function (req, res, next) {
     next()
 })
 
+
+
+
 app.use(function (req, res, next) {
     console.log('我是中间件2');
     next()
