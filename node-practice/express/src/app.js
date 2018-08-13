@@ -18,8 +18,9 @@ app.use(function (req, res, next) {
     next()
 })
 
+console.log(111);
 
-
+console.log(2222);
 
 app.use(function (req, res, next) {
     console.log('我是中间件2');

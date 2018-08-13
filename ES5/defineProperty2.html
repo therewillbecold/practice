@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>defineProperty</title>
+</head>
+<body>
+<h1>defineProperty</h1>
+<script type="text/javascript">
+/**
+* Syntax
+* Object.defineProperty(obj, prop, descriptor)
+* @descriptor: Object 要被定义的属性的特性描述
+* @Return: 返回定义的这个对象
+* 
+*/
+/**
+* descriptor 有两种类型: data descriptor / access descriptor, descriptor必须是两种中的一种, 不能同时设置两种.
+* @data descriptor: 包含value值, 及对该值的描述(value, writable)
+* @access descriptor: 访问器, 配置一对儿getter-setter函数(set, get 方法)
+* 两种descriptor都包含 configurable, enumerable属性
+* configurable: 特性表示对象的属性是否可以被删除，以及除 writable 特性外的其他特性是否可以被修改。
+* enumerable: 是否可枚举, for..in, Ojbect.keys 等方法是否可以枚举该属性
+* value: 值
+* writable: 值是否可修改
+* set: setter, 设置值时触发
+* get: getter, 获取值时触发
+*/
+let obj = {};
+Object.defineProperty(obj, 'name', {
+	configurable: false,
+	enumerable: true,
+	writable: false,
+	value: '令狐冲'
+});
+Object.defineProperty(obj, 'kongfuArr', {
+	configurable: false,
+	enumerable: false,
+	writable: true,
+	value: []
+});
+Object.defineProperty(obj, 'skill', {
+	configurable: false,
+	enumerable: true,
+	set (value)  {
+		console.log('设置age值', arguments);
+		this.kongfuArr.push(value);
+		return value;
+	},
+	get () {
+		console.log('获取age值');	
+		let len = this.kongfuArr.length;
+		let idx = parseInt(Math.random() * len);
+		return this.kongfuArr[idx];
+	}
+});
+obj.skill = '华山剑法';
+obj.skill = '独孤九剑';
+obj.skill = '易筋经';
+obj.skill = '吸星大法';
+console.log('keys:', Object.keys(obj));
+</script>
+</body>
+</html>

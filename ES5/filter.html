@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = ['黄渤', '赵四', '刘能', '小沈阳', '宋小宝', '小沈阳'];
+
+        // 寻找数组中包含‘小’字的明星
+        var result = arr.filter(function(item,idx,origin){
+            return item.indexOf('小') > -1
+        })
+        
+        // 查看处理后的结果
+        console.log(arr)
+        console.log(result)
+    </script>
+</body>
+
+</html>

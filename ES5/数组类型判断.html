@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var a = {};
+        var b = [];
+
+        // 从原型入手，Array.prototype.isPrototypeOf(obj)
+        console.log(Array.prototype.isPrototypeOf(b));
+        // 从构造函数入手，obj instanceof Array
+        console.log(b instanceof Array);
+
+
+    </script>
+</body>
+
+</html>

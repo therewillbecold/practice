@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        var str = 'ABCDEFG'
+        console.log(str.indexOf('G')); //6
+
+
+        var arr = ['刘嘉玲', '韩雪', '汤唯', '苏芒'];
+
+        // 判断数组中是否含有苏芒字段,并找出所在位置
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i] === '苏芒') {
+                console.log(true) //是否含有苏芒字段
+                console.log(i); //所在位置
+            }
+        }
+
+
+
+         // 判断数组中苏芒字段的位置
+        console.log(arr.indexOf('苏芒'));  //3
+        console.log(arr.lastIndexOf('苏芒'));  //3
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+     var arr = ['刘嘉玲', '韩雪', '汤唯', '苏芒'];
+/**
+ * @value 表示数组成员值
+ * @index 表示数组成员索引值
+ * @arrs  表示原数组
+ */
+
+ arr.forEach(function(item,idx,origin){
+    //  console.log(item,idx,origin);
+     if(typeof item == 'string'){
+        origin[idx] = '明星: ' + item;
+     }
+ })
+
+ console.log(arr);
+
+    </script>
+</body>
+</html>

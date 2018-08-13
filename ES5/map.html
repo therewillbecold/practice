@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = ['黄渤', '赵四', '刘能', '小沈阳', '宋小宝', '小沈阳'];
+
+        // 用map遍历arr
+        arr.map(function (value, index, arrs) {
+            arrs[index] = '搞笑：' + value
+            return '搞笑：' + value
+        })
+
+        // 查看map方法执行完毕后，对arr的影响
+        console.log(arr)
+    </script>
+</body>
+
+</html>

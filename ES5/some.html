@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = ['黄渤', '赵四', '刘能', '小沈阳', '宋小宝', '小沈阳'];
+
+        // 判断数组每个成员是否包含小字
+var result = arr.some(function(item,idx,origin){
+    return item.indexOf('小') > -1
+})
+console.log(result);
+
+
+
+        // // 这个方法怎么实现的
+        // var arrSome = function (arr, fn) {
+        //     // 遍历arr来判断fn执行的结果是否正确
+        //     for (var i = 0; i < arr.length; i++) {
+        //         // some判断如果有一个执行结果是true，我们就返回true
+        //         if (fn(arr[i], i, arr)) {
+        //             return true
+        //         }
+        //     }
+        //     return false;
+        // }
+        // var newResult = arrSome(arr, function (value, index, arrs) {
+        //     return value.indexOf('a') > -1
+        // })
+        // console.log(newResult)
+    </script>
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = ['黄渤', '赵四', '刘能', '小沈阳', '宋小宝', '小沈阳'];
+
+        // 判断数组成员都包含‘小’字
+        var result = arr.every(function (item, idx, origin) {
+            return item.indexOf('小') > -1
+        })
+        console.log(result);
+
+
+        // 实现every方法
+        // 第一个当遇到执行结果是false就不会再执行
+        // 这个方法当所有结果都是true，返回true
+        // 回调函数需要三个参数，value，index，arrs，作用域是window
+        var arrEvery = function (arr, fn) {
+            // 对arr中每个成员执行fn。并判断fn返回的结果
+            for (var i = 0, len = arr.length; i < len; i++) {
+                // 对每个成员处理，看返回结果
+                if (!fn(arr[i], i, arr)) {
+                    return false;
+                }
+            }
+            return true
+        }
+        var newResult = arrEvery(arr, function (value) {
+            return value.indexOf('小') > -1;
+        })
+        console.log(newResult);
+
+    </script>
+</body>
+
+</html>

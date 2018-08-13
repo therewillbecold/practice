@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 　- 消除Javascript语法的一些不合理、不严谨之处，减少一些怪异行为;
+        　- 消除代码运行的一些不安全之处，保证代码运行的安全；
+        　- 提高编译器效率，增加运行速度；
+        　- 为未来新版本的Javascript做好铺垫。 -->
+        
+    <script>
+        "use strict";
+
+        console.log('严格模式');
+
+        console.log(eval(1 + 2));
+
+        // 报错，a未声明
+        a = 1;
+
+        // 报错，i未声明 
+        for (i = 0; i < 2; i++) { }
+
+        //报错,eval是保留字
+        var eval = 1;
+
+        // 报错，this未定义
+        function f() {
+            "use strict";
+            this.a = 1;
+        };
+        f();
+
+        // 语法错误，禁止删除变量
+        var x;
+        delete x;
+
+        // 删除成功
+        var o = Object.create(null, {
+            'x': {
+                value: 1,
+                configurable: true
+            }
+        });
+        delete o.x;
+
+        // 语法错误,对象不能有重名的属性
+        var o = {
+            x: 1,
+            x: 2
+        };
+
+        // 语法错误,函数不能有重名的参数
+        function f(q, q, b) {
+            return;
+        }
+    </script>
+</body>
+
+</html>

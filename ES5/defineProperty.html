@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        'use strict';
+        var o = {
+            a: 1, 
+            b: 2,
+            c: {
+                c1: 1,
+                c2: 2
+            }
+        }
+       
+       
+       
+
+        /**
+        * Object.defineProperty(obj, key, descriptor)
+        */
+
+        Object.defineProperty(o, 'false', {
+            value: 33,
+            // 是否可配置该属性的描述
+            configurable: false,
+            // 是否可更改该属性的值
+            writable: false,
+            // 该属性是否能被遍历
+            enumerable: false
+        })
+        
+        Object.defineProperty(o, 'true', {
+            value: 44,
+            configurable: true,
+            writable: true,
+            enumerable: true
+        })
+
+        for (let key in o) {
+            // console.log(key, o[key]);
+        }
+
+        // 设置o为o2的原型链, 即相当于做了个操作 o2.__proto__ = o
+        var o2 = Object.create(o)
+        o2.s1 = 1; 
+        o2.s2 = 2;
+        
+        // for in 可以遍历自身的key, 以及原型链上的key
+        for (let key2 in o2) {
+            if (o2.hasOwnProperty(key2)) {
+                console.log(key2, o2[key2]);
+            }
+        }
+
+
+        // get, set
+
+        var o3 = {
+            a: 1,
+            b: 2
+        }
+        Object.defineProperty(o3, 'g', {
+            // value: 44,
+            get: function () {
+                console.log('get: ', arguments);
+                return ''
+            },
+            set: function (newValue) {
+                console.log('set: ' , arguments);
+                return newValue
+            },
+        })
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        // 有时候为了让创建数组具有数据，我们可以通过fill方法填充
+
+        var arr = new Array(5);
+        console.log(arr); //(5) [empty × 5]
+        arr.fill(5) // (5) [5, 5, 5, 5, 5]
+
+        arr.fill(function () {
+
+        }) //(5) [ƒ, ƒ, ƒ, ƒ, ƒ]
+
+        arr.fill([1, 2, 3, 4, 5]) //(5) [Array(5), Array(5), Array(5), Array(5), Array(5)]
+
+    </script>
+</body>
+
+</html>
