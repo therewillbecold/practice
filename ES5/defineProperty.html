@@ -28,10 +28,11 @@
 
         Object.defineProperty(o, 'false', {
             value: 33,
-            // 是否可配置该属性的描述
-            configurable: false,
+            
             // 是否可更改该属性的值
             writable: false,
+            // 是否可配置该属性的描述
+            configurable: false,
             // 该属性是否能被遍历
             enumerable: false
         })
@@ -69,11 +70,32 @@
         Object.defineProperty(o3, 'g', {
             // value: 44,
             get: function () {
-                console.log('get: ', arguments);
-                return ''
+                console.log('get: ');
+                return this._g;
             },
             set: function (newValue) {
-                console.log('set: ' , arguments);
+                console.log('set: ' , newValue);
+                this._g = newValue
+                return newValue
+            },
+        })
+
+        var shenzhen = {
+            archive: []
+        }
+
+            Object.defineProperty(shenzhen, 'temprature', {
+              // 是否可配置该属性的描述
+                configurable: false,
+                // 该属性是否能被遍历
+                enumerable: false,
+            get: function () {
+                console.log('get: ');
+                return this.archive[this.archive.length - 1];
+            },
+            set: function (newValue) {
+                console.log('set: ' , newValue);
+                this.archive.push(newValue);
                 return newValue
             },
         })

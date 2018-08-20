@@ -33,32 +33,33 @@ Object.defineProperty(obj, 'name', {
 	writable: false,
 	value: '令狐冲'
 });
-Object.defineProperty(obj, 'kongfuArr', {
+Object.defineProperty(obj, 'skills', {
 	configurable: false,
 	enumerable: false,
 	writable: true,
 	value: []
 });
-Object.defineProperty(obj, 'skill', {
+Object.defineProperty(obj, 'getSkill', {
 	configurable: false,
 	enumerable: true,
 	set (value)  {
-		console.log('设置age值', arguments);
-		this.kongfuArr.push(value);
+		console.log('增加skill值', arguments);
+		this.skills.push(value);
 		return value;
 	},
 	get () {
-		console.log('获取age值');	
-		let len = this.kongfuArr.length;
+		console.log('获取skill值');	
+		let len = this.skills.length;
 		let idx = parseInt(Math.random() * len);
-		return this.kongfuArr[idx];
+		return this.skills[idx];
 	}
 });
-obj.skill = '华山剑法';
-obj.skill = '独孤九剑';
-obj.skill = '易筋经';
-obj.skill = '吸星大法';
-console.log('keys:', Object.keys(obj));
+
+// obj.skill = '华山剑法';
+// obj.skill = '独孤九剑';
+// obj.skill = '易筋经';
+// obj.skill = '吸星大法';
+// console.log('keys:', Object.keys(obj));
 </script>
 </body>
 </html>
