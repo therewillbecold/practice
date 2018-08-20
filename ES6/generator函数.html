@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*Generator 函数是 ES6 提供的一种异步编程解决方案。*/
+        /* 定义generator函数*/
+        function* cookEgg() {
+            yield '开火';
+            yield '爆点葱花'
+            yield '下鸡蛋'
+            yield '翻炒'
+            yield '出锅'
+        }
+        var cook = cookEgg()
+        cook.next() //{value: "开火", done: false}
+        cook.next() //{value: "爆点葱花", done: false}
+        cook.next() //{value: "下鸡蛋", done: false}
+        cook.next() //{value: "翻炒", done: false}
+        cook.next() //{value: "出锅", done: false}
+        cook.next() //{value: undefined, done: true}
+
+
+        function* onlineShopping() {
+            yield '打开淘宝';
+            yield '输入商品名称';
+            yield '比价';
+            yield '加入购物车';
+            yield '支付宝买单';
+        }
+        var shopping = onlineShopping()
+        shopping.next()
+
+
+
+
+        /*
+* generator函数注册
+* 可以通过 function* () {} 或构造函数 new GeneratorFunction ([arg1[, arg2[, ...argN]],] functionBody)
+* 一个generator函数返回一个iterator可迭代对象. 当调用 sg.next()方法, 函数开始执行, 直到第一个yield 表达式. yield表达式指定要返回的值. 不会执行该yield后面的语句.  
+* yield* 表达式可以将函数过程委托给另外一个generator函数. 执行完该函数后再回到第一个generator中执行后续的流程. 
+* return: 如果generator中有return, 则执行到return后会得到相应的值, 并退出该函数. 停止执行后续的流程. 
+*/
+
+        function resolveAfter2S(n) {
+            return new Promise((resovle, reject) => {
+                setTimeout(function () {
+                    if (n < 50) {
+                        resovle(n);
+                        console.log('resolved');
+                    } else {
+                        reject(n);
+                        console.log('rejected');
+                    }
+                }, 2000)
+            })
+        }
+
+        function* stateGenerator(val) {
+            var n = 0;
+            function add() {
+                return n++
+            }
+            yield 'state1';
+            yield add();
+            yield add;
+            yield add();
+            yield 'state2';
+            yield* stateGenerator2(); // 可以委托给其他的generator
+            yield 'state3';
+            yield* ['state5', 'state6']; // 可以委托给数组等可迭代对象
+            yield function () {
+                console.log('我是函数');
+            }
+            function* stateGenerator2() {
+                yield 'state10';
+                yield resolveAfter2S(10);
+                yield 'state20';
+                yield 'state30';
+            }
+        }
+        var sg = stateGenerator();
+        sg.next()
+
+
+
+    </script>
+</body>
+
+</html>

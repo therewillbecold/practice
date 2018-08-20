@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*小案例*/
+        console.log(1);
+        try {
+            console.log(2);
+            console.log(a); throw 'err'
+            console.log(3);
+        } catch (err) {
+            console.log('a is not defined');
+        }
+        console.log(4);
+
+       // 1
+       // 2
+       // a is not defined
+       //4
+    </script>
+
+    <p>请输入5 到 10 之间的一个数字:</p>
+    <input type="text" id="demo">
+    <button onclick="fn()">检测输入</button>
+    <p id="msg"></p>
+    <script>
+        function fn() {
+            var msg, n;
+            msg = document.querySelector('#msg');
+            msg.innerHTML = '';
+            n = document.querySelector('#demo').value;
+            try {
+                if (n == '') throw new Error('为空');
+                if (isNaN(n)) throw  new Error('不是一个数字') ;
+                if (n > 10) throw  new Error('太大了') ;
+                if (n < 5) throw  new Error('太小了') ;
+            } catch (err) {
+                msg.innerHTML = '输入的值' + err;
+            }
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>

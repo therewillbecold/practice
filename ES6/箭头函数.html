@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function math1(a, b, c) {
+            return a + b + c
+        }
+        var math2 = (a, b, c) => {
+            return a + b + c
+        }
+
+        /*如果是一行的话可以相当于 return a + b + c*/
+        var math3 = (a, b, c) => a + b + c
+
+
+
+        function fullName1(name) {
+            return '上官' + name
+        }
+        /*只有一个参数的话可以省略小括号*/
+        var fullName2 = name => '上官' + name
+        console.log(fullName2('晓'));
+
+
+
+        console.log('-------------- 构造函数不能用箭头函数-------------');
+
+
+        /* 正常的构造函数 */
+        function People(name = 'Jane Doe', age = 'unknown') {
+            this.name = name;
+            this.age = age;
+        }
+        var jane = new People('jane', 18)
+
+
+        /*构造函数用箭头函数会报错.*/
+        var PeopleArray = (name = '佚名', age = 18) => {
+            this.name = name;
+            this.age = age
+        }
+        var jane = new peopleArray('jane', 18) //报错
+
+
+
+        console.log('-------------- 箭头函数中的this对象-------------');
+
+        var fn = function () {
+            console.log(this)
+        }
+        fn() //Window
+
+        /* 箭头函数中的this在函数时决定, 不能被改变.*/
+        var obj = {
+            a: function () {
+                console.log(this, '传统函数a'); //{a: ƒ, b: ƒ, c: ƒ} "传统函数a" 
+            },
+            /*属性b的值是个箭头函数, 该箭头函数定义的上下文环境为window, 只有函数才能分割上下文环境*/
+            b: () => {
+                console.log(this, '箭头函数b'); //Window  "箭头函数b"
+            },
+            c: function () {
+                console.log(this, '传统函数c'); //{a: ƒ, b: ƒ, c: ƒ} "传统函数c"
+                var demo = () => {
+                    console.log(this, 'c中的箭头函数');//{a: ƒ, b: ƒ, c: ƒ} "c中的箭头函数"
+                }
+                demo()
+            }
+        }
+
+
+
+    </script>
+</body>
+
+</html>

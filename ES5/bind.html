@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // bind 用来改变函数中的this
+        function sayHello () {
+            console.log(this);
+        }
+
+        let lily = {
+            name: 'lily'
+        }
+
+        // sayHello.call(lily)
+        // sayHello.apply(lily)
+        let fn = sayHello.bind(lily)
+
+        Function.prototype.myBind = function (obj) {
+            const that = this
+            return function (...args) {
+                that.call(obj, args)
+            }
+        }
+    </script>
+</body>
+</html>

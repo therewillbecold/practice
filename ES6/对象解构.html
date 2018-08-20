@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*Destructuring*/
+
+        /* 数组的解构*/
+        var a = 1, b = 2;
+
+        /* 交换2个变量的值*/
+
+        /*方法一*/
+        [a, b] = [b, a];
+        /*方法二*/
+        var a = 1, b = 2;
+        var c = a;
+        a = b, b = c;
+        /*方法三*/
+        var a = 1, b = 2;
+        a = [b, b = a][0]
+
+
+
+        /*定义变量a, b, c 的值为1, 2, 3*/
+        var [a, b, c] = [1, 2, 3];
+        var [j, a, n, e] = [5, 2, 6, 0]
+
+
+
+        /* 如果定义的一个对象的key和变量一样, 则可以如下简写*/
+
+        var name = 'jane', age = 18, bf = [], family = { mom: 'mom' }, fn = function () { }
+        /*传统写法*/
+        var obj = { name: name, age: age, bf: bf, family: family, fn: fn }  //{name: "jane", age: 18, bf: Array(0), family: {…}, fn: ƒ}
+        /*ES6*/
+        var obj = { name, age, bf, family, fn }  //{name: "jane", age: 18, bf: Array(0), family: {…}, fn: ƒ}
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var str = 'abcdefg'
+
+        /*符串大小写转换*/
+        str.toUpperCase() //'ABCDEFG'
+        str.toLowerCase() //'abcdefg'
+
+
+        /*字符串b是否在字符串a中出现*/
+        var str1 = 'abcdefg'
+        var str2 = 'abc'
+        str1.indexOf('a')  //6  该参数下标项
+        str1.indexOf(str2) !== -1  //不是-1 说明str3中含有str4  结果为true
+
+
+        /* 判断str字符串是否是以' '开头的 -  是否是是以 '' 为结尾的 */
+        str.includes('cd');   //true，表示str是否找到了参数cd
+        str.startsWith('a');  //true，表示是否在str的头部找到了参数a
+        str.endsWith('g');   //true，表示是否在str的尾部找到了参数g
+
+        str.includes('cde', 2);  //true，表示参数cd的第一位数字位于该str的第2个下标项
+        str.startsWith('cde', 2);  //true，表示参数cd的第一位数字位于该str的第2个下标项
+        str.endsWith('efg', 7); //true 表示参数efg的最后一位数字g 位于该str第几个
+
+
+        //字符串截取 
+        str.substr(2, 2) === 'cd'   //true 
+
+        /* repeat() */
+        "jane".repeat(3)   //jane
+        "jane".repeat(2.9) //jane    如果是小数，则取整
+        "jane".repeat(-2)  //error
+        "jane".repeat(Infinity)    //error
+        "jane".repeat(-0.9)    //""    -1至0之间等同于0
+        "jane".repeat(NaN) //""
+        "jane".repeat('abc')   //""
+        "jane".repeat('3')     //jane   如果是字符串，则先转成数字
+
+
+        /*字符串长度补全功能*/
+        var str = 'jane'
+        str.padEnd(5, 'y') //janey
+
+
+        /*raw不会将转义字符转义*/
+        'jane\n jane'
+            /*"jane
+             jane"*/
+            `jane\n jane`
+        /*"jane
+         jane"*/
+        var str = String.raw`jane\n jane`
+ /*"jane\n jane"*/
+    </script>
+</body>
+
+</html>

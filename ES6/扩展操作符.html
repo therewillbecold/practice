@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*ES6中的...语法*/
+
+        /*函数中...来获取多个参数*/
+        function add(n1, n2, ...n) {
+            console.log(n);
+        }
+        add(1, 2, 3, 4, 5); //(3) [3, 4, 5]
+        add(1, 2, 3, 4, 5, 6, 7, 8);//(6) [3, 4, 5, 6, 7, 8]
+
+
+
+        /*...作为数组中剩余的项*/
+        var arr1 = [0, 0, 0, 0, 0];
+        var arr2 = [...arr1];
+        arr2 //(5) [0, 0, 0, 0, 0]
+
+        /*连接2个数组的方法*/
+
+        /*方法一*/
+        var arr3 = [...arr1, ...arr2];  //(10) [1, 2, 3, 4, 5, 1, 2, 3, 4, 5]
+
+        /*方法二*/
+        arr1.concat(arr2); // (10) [1, 2, 3, 4, 5, 1, 2, 3, 4, 5]
+
+        /*方法三*/
+        var arr1 = [1, 2, 3, 4, 5]
+        var arr2 = [1, 2, 3, 4, 5]
+        Array.prototype.push.apply(arr1, arr2);
+        arr1 //(10) [1, 2, 3, 4, 5, 1, 2, 3, 4, 5]
+
+
+        /*对象中...用法*/
+
+        var obj1 = {
+            a: 1,
+            b: 2,
+            c: 3
+        }
+
+        var obj2 = {
+            d: 4,
+            e: 5,
+            f: 6
+        }
+
+        var obj3 = {
+            d: 7,
+            e: 8,
+            f: 9
+        }
+
+        var obj4 = { ...obj1, ...obj1, ...obj3 }
+        obj4 //{a: 1, b: 2, c: 3, d: 7, e: 8, …}
+    </script>
+</body>
+
+</html>

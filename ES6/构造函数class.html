@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*传统定义一个构造函数   通常构造函数上放属性*/
+        function Fruit(location, sweetness) {
+            this.location = location;
+            this.sweetness = sweetness;
+            this.juice = function () {
+                if (this.sweetness === 'sweet') {
+                    console.log('I\'m  good for making juice');
+                } else {
+                    console.log('Sorry, I\'m  not for juice');
+                }
+
+            }
+        }
+        /*构造函数的原型链prototype   通常原型链上放方法*/
+        Fruit.prototype = {
+            grow() {
+                console.log('I\'m still growing ');
+            },
+            ripe() {
+                console.log('I\'m ripe now');
+            }
+        }
+
+
+        /*实例一个orange*/
+        var orange = new Fruit('new zealand', 'sweet'); //得到Fruit的属性
+        orange.__proto__.grow() //得到Fruit原型链上的的方法
+        orange instanceof Fruit  //true
+
+
+
+
+        console.log('-------------------------Lemon-------------------------');
+
+        function Lemon(type, color, location, sweetness) {
+            this.type = type;
+            this.color = color;
+            Fruit.call(this, location, sweetness); // 继承Fruit构造函数中的属性和方法
+        }
+
+        Lemon.prototype = new Fruit();
+        Lemon.prototype.soup = function () {
+            console.log('Using me for a soup is not a bad choice!!');
+        }
+
+        Lemon.prototype //得到原型链上的方法
+
+        var lime = new Lemon('lime', 'green', 'America', 'sour');
+
+
+        console.log('--------------------Grape-----------------------');
+
+        function Grape(type, color, location, sweetness) {
+            this.type = type;
+            this.color = color;
+            Fruit.call(this, location, sweetness); // 继承Fruit构造函数中的属性和方法
+        }
+        Grape.prototype = new Fruit();
+        Grape.prototype.wine = function () {
+            if (this.color === 'purple') {
+                console.log('I was born for your wine!!');
+            } else {
+                console.log('Maybe a juice??');
+            }
+        }
+        Grape.prototype.raisin = function () {
+            console.log('Put me in your oatmeal, you will love it !');
+        }
+
+        var bigGrape = new Grape('redGrape', 'purple', 'China', 'sweet');
+
+
+        /*ES6 中定义一个构造函数*/
+
+        class Fruit1 {
+            constructor(location, sweetness) {
+                this.location = location;
+                this.sweetness;
+            }
+            juice() {
+                if (this.sweetness === 'sweet') {
+                    console.log('I\'m  good for making juice');
+                } else {
+                    console.log('Sorry, I\'m  not for juice');
+                }
+
+            }
+            grow() {
+                console.log('I\'m still growing ');
+            }
+            ripe() {
+                console.log('I\'m ripe now');
+            }
+        }
+
+
+        console.log('-------------------------Lemon-------------------------');
+        
+        class Lemon1 extends Fruit1 {
+            constructor(type, color, location, sweetness) {
+                super(location, sweetness)
+                this.type = type;
+                this.color = color;
+            }
+            soup() {
+                console.log('Using me for a soup is not a bad choice!!');
+            }
+
+        }
+
+        var lime1 = new Lemon1('lime', 'green', 'America', 'sour')
+
+
+        console.log('--------------------Grape-----------------------');
+
+        class Grape1 extends Fruit1 {
+            constructor(type, color, location, sweetness) {
+                super(location, sweetness)
+                this.type = type;
+                this.color = color;
+            }
+            wine() {
+                if (this.color === 'purple') {
+                    console.log('I was born for your wine!!');
+                } else {
+                    console.log('Maybe a juice??');
+                }
+            }
+            raisin() {
+                console.log('Put me in your oatmeal, you will love it !');
+            }
+        }
+        var greenGrape = new Grape('greenGrape', 'green', 'Japan', 'sweet');
+
+
+        /*构造函数的缺点：
+        所有的实例对象都可以继承构造器函数中的属性和方法。但是，同一个对象实例之间，无法共享属性
+        
+        　　　　解决思路：
+        　　　　　  a:所有实例都会通过原型链引用到prototype  
+        　　　　　　b:prototype相当于特定类型所有实例都可以访问到的一个公共容器
+        　　　　　　c:那么我们就将重复的东西放到公共容易就好了
+        */
+    </script>
+</body>
+
+</html>

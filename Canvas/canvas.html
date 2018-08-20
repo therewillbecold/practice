@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="myCanvas" width='500' height='500'></canvas>
+    <script>
+        /*canvas 元素本身是没有绘图能力的. 所有的绘制工作必须在 JavaScript 内部完成.*/
+
+        // 找到 <canvas> 元素:
+        var canvas = document.getElementById('myCanvas')
+        //创建 context 对象：
+        var ctx = myCanvas.getContext('2d');
+        // 设置fillStyle属性可以是CSS颜色，渐变，或图案
+        ctx.fillStyle = "#FF0000";
+        //fillRect(x,y,width,height) 
+        ctx.fillRect(0, 0, 150, 75);
+        ctx.strokeRect(100,100,100,100);
+    </script>
+</body>
+
+</html>

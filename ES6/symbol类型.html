@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*ES6引入了一种新的原始数据类型Symbol，表示独一无二的值*/
+        var a = 'color', b = 'color', c = 'color';
+        var o = {
+            [a]: 'red',
+            [b]: 'blue',
+            [c]: 'green'
+        };
+        console.log(o);  // {color: "green"}
+
+        /*对象的属性不能重复，否则前面的属性会被后面的属性覆盖.
+        为了解决这类问题，我们可以通过Symbol实现*/
+        var a = Symbol('color'), b = Symbol('color'), c = Symbol('color');
+        var o = {
+            [a]: 'red',
+            [b]: 'blue',
+            [c]: 'green'
+        };
+        console.log(o);  // {Symbol(color): "red", Symbol(color): "blue", Symbol(color): "green"}
+        a === b //false
+        a.toString() === b.toString()  //true
+
+
+        /* 没有参数的情况 */
+        var s1 = Symbol(), s2 = Symbol()
+        s1 === s2 // false
+
+        // 有参数的情况
+        var s1 = Symbol('jane'), s2 = Symbol('jane')
+        s1 === s2  // false
+    </script>
+</body>
+
+</html>

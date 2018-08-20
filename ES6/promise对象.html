@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* ES6规定，Promise对象是一个构造函数，用来生成Promise实例*/
+        new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                resolve('resolved');
+                reject('rejected');
+            }, 3000)
+        }).then(function (res) {
+            console.log('success:', res)
+        }, function (err) {
+            console.log('err:', err)
+        })
+
+
+        /*检测浏览器是否支持Promise*/
+        if (typeof (Promise) === "function") {
+            alert("支持Promise");
+        }
+        else {
+            alert("不支持Promise");
+        }
+
+
+
+        var p1 = new Promise((resolve, reject) => {
+            setTimeout(function () {
+                console.log('p1 done');
+                resolve();
+            }, 1000)
+        });
+
+        var p2 = new Promise((resolve, reject) => {
+            setTimeout(function () {
+                console.log('p2 done');
+                resolve();
+                reject();
+            }, 3000)
+        });
+
+        /* 此时我们对这两个promise对象监听, 2个promise全部完成之后才会调用后面的回调函数*/
+        Promise.all([p1, p2]).then(function () {
+            console.log('success');
+        },function(){
+            console.log('failed');
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        'use strict';
+        
+        /**
+         * - var 是函数作用域, 作用域被函数分割, let 是块级作用域
+         * - var 定义的变量, 在定义之前可以被访问, 值是undefined, let 定义的在定义之前访问会报错.
+         * - const 定义常量, 定义的常量不能被修改, 也不能重复定义, 同时也是块级作用域
+         */
+
+        
+        console.log('var:', v_a);
+        // console.log('let:', l_a);
+        var v_a = 1;
+        let l_a = 1;
+
+        // console.log('v_a:', v_a, 'l_a:', l_a);
+
+        function haha () {
+            var v_b = 1;
+            let l_b = 1;
+            // console.log('v_b:', v_b, 'l_b:', l_b);
+            console.log('v_a:', v_a, 'l_a:', l_a);
+            if (true) {
+                var v_c = 1;
+                let l_c = 1;
+                // console.log('v_c:', v_c, 'l_c:', l_c);
+                
+                if (true) {
+                    console.log('v_c:', v_c, 'l_c:', l_c);
+                }
+
+            }
+            // console.log('v_c:', v_c, 'l_c:', l_c);
+
+        }
+
+        // console.log('v_b:', v_b, 'l_b:', l_b);
+        // console.log('v_c:', v_c, 'l_c:', l_c);
+
+        haha()
+        
+
+
+    </script>
+
+
+</body>
+</html>

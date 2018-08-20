@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <script>
+        var lis = document.querySelectorAll('ul li') //lis是个类数组
+
+        /*判断lis是否是数组*/
+        lis instanceof Array //false
+
+        // 查看lis的数据结构
+        console.log(lis); //NodeList(5) [li, li, li, li, li] 
+
+        for (var i = 0; i < lis.length; i++) {
+            console.log(lis[i])
+        }
+
+        /* 有时候为了处理方便我们需要将它变成一个数组*/
+        var arr = Array.from(lis);
+        console.log(arr instanceof Array) //true
+        console.log(arr) //(5) [li, li, li, li, li]
+        console.log(arr.length);
+
+        /* from传递两个参数*/
+        var arr1 = Array.from(lis, function (value, index) {
+            console.log(value, index);
+            value.innerHTML += value.innerHTML;
+            // 没有将value返回
+            return value;
+        })
+        console.log(arr1);
+
+        var arr = Array.from([1, 2, 3], x => x * 10);
+        // arr[0] == 10;
+        // arr[1] == 20;
+        // arr[2] == 30;
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        console.log('---------------各种遍历方法---------------');
+
+        /*原生实现遍历*/
+        var fruits = ["lychee", "grape", "plum", "pineapple", "orange"];
+        var each = () => {
+            for (var i = 0; i < fruits.length; i++) {
+                /*获取fruits的值arr[i]*/
+                // if (fruits[i] == "plum") {
+                // 	return;
+                // }
+                console.log(fruits[i]);
+            }
+        }
+
+        /*ES5 forEach() */
+        fruits.forEach(function (value, idx, arr) {
+            /*获取fruits的值arr[i]*/
+            // if (value  == "plum") {
+            //     return;
+            // }
+            console.log(value);
+        })
+
+        /*遍历还有个for in循环*/
+        for (var value in fruits) {
+            console.log(fruits[value])
+        }
+
+        /*ES6 for of循环迭代器*/
+        var demo = () => {
+            for (var value of fruits) {
+                // if (value == 'plum') {
+                //     return;
+                // }
+                console.log(value);
+            }
+        }
+
+    </script>
+</body>
+
+</html>

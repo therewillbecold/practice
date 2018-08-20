@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        /*async的用法，它作为一个关键字放到函数前面，用于表示函数是一个异步函数，
+        异步函数也就意味着该函数的执行不会阻塞后面代码的执行。*/
+        async function timeout() {
+            return 'hello world';
+        }
+
+        timeout();
+        console.log('虽然在后面，但是我先执行');
+        //空
+        //虽然在后面，但是我先执行
+
+        /*async 函数 timeout  调用后没有任何输出，它不是应该返回 'hello world'
+       此时把上面的 timeout() 语句改为console.log(timeout()) 看一看timeout()执行返回了什么？ */
+        console.log(timeout());
+        console.log('虽然在后面，但是我先执行');
+        //Promise {<resolved>: "hello world"}
+        //虽然在后面，但是我先执行
+
+        /*原来async 函数返回的是一个promise 对象，如果要获取到promise 返回值，
+        我们应该用then 方法， 继续修改代码*/
+        async function timeout() {
+            return 'hello world'
+        }
+        timeout().then(result => {
+            console.log(result);
+        })
+        console.log('虽然在后面，但是我先执行');
+        //虽然在后面，但是我先执行
+        //hello world
+
+        /*这时，你可能注意到控制台中的Promise 有一个resolved，这是async 函数内部的实现原理。
+        如果async 函数中有返回一个值 ,当调用该函数时，内部会调用Promise.resolve() 方法把它转化成一个promise 对象作为返回，
+        但如果timeout 函数内部抛出错误呢？ 那么就会调用Promise.reject() 返回一个promise 对象， 这时修改一下timeout 函数*/
+
+        async function timeout(flag) {
+            if (flag) {
+                return 'hello world'
+            } else {
+                throw 'u failed'
+            }
+        }
+        timeout(false).catch(err => {
+            console.log(err)
+        })
+        // console.log(timeout(true))  // 调用Promise.resolve() 返回promise 对象。
+        // console.log(timeout(false)); // 调用Promise.reject() 返回promise 对象。
+    </script>
+</body>
+
+</html>

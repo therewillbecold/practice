@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Default arguments</h1>
+    <script>
+        function greeting1(name, age) {
+            name = name || 'Jane Doe'
+            age = age || 'unknown'
+            console.log(`my name is ${name} Im ${age}`);
+        }
+
+        function greeting2(name = 'John Doe', age = 'unknown') {
+            console.log(`my name is ${name} Im ${age}`);
+        }
+
+        /*将h1的字体设置成参数颜色*/
+        function setFontColor(color = 'maroon') {
+            document.querySelector('h1').style.color = color;
+        }
+        setFontColor() 
+        setFontColor('darkgreen');
+    </script>
+</body>
+
+</html>

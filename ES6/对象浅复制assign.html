@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 定义三个对象，我们希望将obj2，obj3对象中的属性赋值到obj1中*/
+        var o1 = {
+            a: 'red'
+        };
+        var o2 = {
+            b: 'green'
+        };
+        var o3 = {
+            c: {
+                color: 'blue'
+            }
+        };
+
+        // 浅复制
+        function extend() {
+            var target = arguments[0];
+            for (var i = 1; i < arguments.length; i++) {
+                for (var key in arguments[i]) {
+                    // 将每个对象中的属性赋值给target
+                    target[key] = arguments[i][key]
+                }
+            }
+            /* 最终得到target，将target return*/
+            return target;
+        }
+        // var res = extend(true, o1, o2, o3);
+        var res = extend(o1, o2, o3);
+
+        /*将res结果及三个对象打印出来*/
+        console.log(res, o1, o2, o3);
+
+        // 我们想查看o1中的c属性和o3中的c属性是否全等
+        console.log(o1.c == o3.c)
+
+
+        console.log('----------------------assign------------------------');
+        
+        let obj1 = {
+            a: 'red'
+        };
+        let obj2 = {
+            b: 'green'
+        };
+        let obj3 = {
+            c: {
+                color: 'blue'
+            }
+        };
+        // 我们想让obj1获取obj2和obj3的属性，可以通过assign方法实现
+        var res = Object.assign(obj1, obj2, obj3);
+
+        /*将res结果及三个对象打印出来*/
+        console.log(res, obj1, obj2, obj3);
+    </script>
+</body>
+
+</html>

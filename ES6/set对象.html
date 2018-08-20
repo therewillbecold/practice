@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        console.log('----------------Set----------------');
+        /* Set 对象允许你存储任何类型的唯一值
+        类似与 Map ，区别是不存value  只是存储key, 可以放进去多个相同的key，但是只会有一个key起作用*/
+        var set1 = new Set([1, 2, 3, 4, 4, 4]);
+        Array.from(set1) //(4) [1, 2, 3, 4]
+        /*可以看到，以上重复的4，在set1里面只保存了一个， 所以Set对象可以用来给数组去重；*/
+
+        set1.add(5) //Set(5) {1, 2, 3, 4, 5}
+        set1.add('六') //Set(6) {1, 2, 3, 4, 5, '六'}
+        set1.add('六') //Set(6) {1, 2, 3, 4, 5, '六'}
+        set1.delete('六') //Set(5) {1, 2, 3, 4, 5}
+        set1.has(1) //true
+        set1.has(1, 2, 3, 4, 5) //Set(0) {}
+        set1.size //5
+
+
+
+        console.log('----------------WeakSet----------------');
+
+        /*WeakSet对象是一些对象值的集合, 并且其中的每个对象值都只能出现一次，
+        WeakSet只能存对象类型的元素，比如：Object, Array, Function 等等；有了弱引用的WeakSet， 就不用担心内存泄漏了，如果别的对象不引用该对象， 这个对象会被垃圾回收机制自动回收；
+        　　WeakSet对象的方法只有三个，而且WeakSet对象没有size属性；
+        　　　　weakSet.add();
+        　　　　weakSet.delete();
+        　　　　weakSet.has();*/
+
+        var ws = new WeakSet();
+        ws.add(window);
+        ws.add('a') //报错
+        
+    </script>
+</body>
+
+</html>

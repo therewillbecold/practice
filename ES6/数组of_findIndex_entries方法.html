@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        console.log('-----------------of方法---------------------');
+
+        /*原生js创建数组*/
+        console.log(Array()); //[]
+        console.log(Array(6)); //(6) [empty × 6]
+        console.log(Array(1, 1)); //(2) [1, 1]
+
+        /*of方法用来解决传递参数不同得到属性的行为不一致的问题*/
+        console.log(Array.of()) //[]
+        console.log(Array.of(1)) //[1]
+        console.log(Array.of(1, 1)) //(2) [1, 1]
+        console.log(Array.of(1, 1, 1)) //(3) [1, 1, 1]
+
+
+console.log('-----------------findIndex方法---------------------');
+
+        var arr = ['刘能', '赵四', '小沈阳', '宋小宝'];
+        // find 搜索符合条件的数组成员 
+        
+        /*找到第一个名字中含有小字的明星,遇到一个就返回*/  
+        var res = arr.find(function (item, idx, origin) {
+            return item.indexOf('小') > -1;
+        })
+        console.log(res);
+
+
+        /* 获取符合条件成员索引值*/
+        var res = arr.findIndex(function (item, idx, origin) {
+            return item.indexOf('小') > -1;
+        })
+        console.log(res);
+
+        
+
+console.log('-----------------entries方法---------------------');
+
+        var arr = ['刘能', '赵四', '小沈阳', '宋小宝'];
+        /*保留是所有数组成员索引值*/
+        var keys = arr.keys(); //Array Iterator {}
+        /*for of 是数组迭代器提供的一种语法*/
+        for (var key of keys) {
+            console.log(key)
+        } //0,1,2,3
+        /*保留的是所有数组成员的值*/
+        var values = arr.values();
+        for (var value of values) {
+            console.log(value)
+        } //刘能 赵四 小沈阳 宋小宝
+
+        /*保留的是，将数组成员的索引值以及数组成员的值，保留在一个新数组中，并把这些新数组保留在一数组返回的是一个数组迭代器对象*/
+        var entries = arr.entries();
+        for (var item of entries) {
+            console.log(item)
+        }
+        console.log(entries instanceof Object)
+
+console.log('--------------------reduce-------------------');
+
+    var arr = ['我', '爱', '麻', '婆', '豆腐']
+    var initValue = ''
+    var res = arr.reduce((accumulator, currentValue, index, originArr) => {
+        return accumulator + currentValue
+    }, initValue)
+    console.log(res);
+
+    </script>
+</body>
+
+</html>

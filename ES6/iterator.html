@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 数据结构解析*/
+        var s = new Set([3, 2, 1]);
+        s //Set(3) {3, 2, 1}
+        var [x, y] = s;
+        x //3
+        y //2  
+
+        /*...语法*/
+        var fruits = ['plum', 'pineapple', 'orange'];
+        var arr = ['lychee', 'grape', ...fruits];
+        // arr(6) ["lychee", "grape", "plum", "pineapple", "orange"]
+        for (var i of arr) {
+            console.log(i)
+        }
+    </script>
+</body>
+
+</html>

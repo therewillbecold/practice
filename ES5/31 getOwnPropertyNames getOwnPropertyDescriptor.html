@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+var Demo = function () {}
+Demo.prototype.width = 100;
+var obj = new Demo();
+
+Object.defineProperties(obj, {
+	color: {
+	},
+	title: {
+		value: '小沈阳',
+		writable: true
+	}
+})
+obj.size = 1000;
+
+for (var i in obj) {
+	console.log(i, obj[i], 111)
+}
+
+// 查看obj对象上的所有属性名称
+var names = Object.getOwnPropertyNames(obj);
+console.log(names)
+
+// 查看属性特性
+// 遍历names，查看所有names的属性的特性，names是一个数组，我们可以用for循环遍历
+for (var i = 0; i < names.length; i++) {
+	// 查看属性的特性
+	// getOwnPropertyDescriptor 产看属性特性方法，接收两个参数，表示原对象，以及要查看的属性名称
+	console.log(names[i], Object.getOwnPropertyDescriptor(obj, names[i]))
+}
+console.log(222, Object.getOwnPropertyDescriptor(obj, 'width'))
+</script>
+</body>
+</html>

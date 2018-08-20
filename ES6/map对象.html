@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        var map1 = new Map();
+        var keyString = 'string', keyObj = {}, keyFn = function () { }, keyDocument = 'document', keyArr = [];
+
+        map1.set(keyString, '字符串');
+        map1.set(keyObj, '对象');
+        map1.set(keyFn, '函数');
+        map1 //Map(3) {"string" => "字符串", {…} => "对象", ƒ => "函数"}
+        map1.size //3
+        map1.get(keyString) //"字符串"
+
+
+        /*使用Map实例的forEach方法；*/
+        var map2 = new Map();
+        map2.set(keyDocument, '文档');
+        map2.set(keyArr, '数组');
+        map2.forEach(function (value, key, map) {
+            console.log(key, value, map);
+        });
+
+        /*使用for...of循环*/
+        var map3 = new Map();
+        map3.set(undefined, '0');
+        map3.set(NaN, {});
+        for (var [key, value] of map3) {
+            console.log(key, value);
+        }
+
+
+        map3.set
+        map3.set(undefined, "0");
+        map3.set(NaN, {});
+        for (var [key, value] of map3) {
+            console.log(key, value);
+        }
+        for (var arr of map3) {
+            console.log(arr);
+        }
+
+        console.log('--------------WeakMap-------------');
+        var wp = new WeakMap();
+        wp.set(document.body, 'body')
+        console.log(wp)
+
+    </script>
+</body>
+
+</html>

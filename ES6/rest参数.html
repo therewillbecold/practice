@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function add1() {
+            var sum = 0;
+            Array.from(arguments).forEach(item => sum += item)
+            return sum
+        }
+
+        /*...args 可以指代剩余的参数, 必须位于最后一个参数*/
+        function add2(n1, n2, ...restArgs) {
+            var sum = 0;
+            Array.from(restArgs).forEach(item => sum += item)
+            return sum
+        }
+
+        /*在es6中可以通过...语法来获取多个参数 */
+        function add3(num1, num2, ...num) {
+            for (var i of num) {
+                console.log(i)
+            }
+            console.log(arguments)
+        }
+    </script>
+</body>
+
+</html>

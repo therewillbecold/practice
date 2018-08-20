@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        /*Proxy语法
+        let p = new Proxy(target, handler);
+        target：用Proxy包装的目标对象（可以是任何类型的对象，包括原生数组，函数，甚至另一个代理）。
+        handler：一个对象，其属性是当执行一个操作时定义代理的行为的函数。*/
+
+        var star = {
+            name: '苏芒',
+            msg: '对工作要求高一点,对生活要求低一点，对爱人的要求就更低一点.'
+        }
+
+        var assistant = new Proxy(star, {
+            get: function (target, key) {
+                console.log(target, key);
+                if (key === 'marriage') {
+                    return 'Mind your own business!'
+                }
+            },
+            set: function (target, key, value) {
+                console.log(target, key, value);
+                if (key === 'marriage') {
+                    return;
+                }
+                target[key] = value;
+                return value;
+            }
+        })
+        
+        /*通过assistant来访问star的数据的时候,不可以得到marriage的值,也不可以自己设置上去*/
+        console.log(assistant.marriage);
+        console.log(assistant.marriage = 'married'); 
+        console.log(star); //star中不会出现改变
+
+    </script>
+</body>
+
+</html>

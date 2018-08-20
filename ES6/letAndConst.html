@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        console.log('--------------------var-------------------');
+
+        /*不报错 结果为v2 */
+        var v = 'v1';
+        var v = 'v2';
+
+        for (var i = 0; i < 5; i++) {
+            console.log(i);
+        }
+        console.log(i);   //0,1,2,3,4,5
+
+        /* var 存在 ‘变量提升’ 现象 */
+        console.log(v);  // undefined
+        var v = 2;
+
+        function fnv() {
+            var n = 5;
+            if (true) {
+                var n = 10;
+            }
+            console.log(n); // 10
+        }
+        fnv()
+
+
+
+        console.log('--------------------let-------------------');
+
+        /* 报错, let 不允许在相同作用域内，重复声明同一个变量*/
+        var no = 'v1';
+        let no = 'l2';
+
+        /* let 声明的变量只在它所在的代码块有效；*/
+        for (let i = 0; i < 10; i++) {
+            console.log(i);
+        }
+        // console.log(i); // i is not defined
+
+        /* 不存在变量提升, 变量需要先声明然后再使用 */
+        console.log(l);  // 报错
+        let l = 2;
+
+        /* 快级作用域内存在let命令，它所声明的变量就绑定在这个区域，不再受外部影响 */
+        var tmp = 123;
+        if (true) {
+            tmp = 'abc';
+            let tmp;
+            console.log(tmp);  // tmp is not defined
+        }
+
+        // 也不能在函数内部重新声明参数。
+        function fn1(arg) {
+            let arg; // 报错
+        }
+        function fn2(arg) {
+            {
+                let arg; // 不报错
+            }
+        }
+        /* 上面的代码有2个代码块，都声明了变量n，运行后输出5，说明了外层代码块不受内层代码块的影响，如果使用了变量var，那么输出的就是10；*/
+        function fnl() {
+            let n = 5;
+            if (true) {
+                let n = 10;
+            }
+            console.log(n); // 5
+        }
+        fnl()
+
+
+
+        console.log('--------------------const-------------------');
+
+        /* const 声明一个只读的常量，一旦声明，常量的值就不允许改变。*/
+        const c = 3;
+        c = 4
+        console.log(c); // 报错
+
+        /*也就是说 const 一旦声明了变量，就必须初始化，不能留到以后赋值。如果使用const声明一个变量，但是不赋值，也会报错*/
+        const aa;  // 报错
+
+        /* const的作用域与let命令相同；只在声明所在的块级作用域内有效。*/
+        if (true) {
+            const aa = 1;
+        }
+        console.log(aa);  // 报错
+
+        /*不可重复声明 (和let一样)*/
+        var message = "Hello!";
+        let age = 25;
+
+        // 以下两行都会报错
+        const message = "Goodbye!";
+        const age = 30;
+    </script>
+</body>
+
+</html>

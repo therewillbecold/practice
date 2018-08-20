@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin-left: 10px;
+            padding: 0;
+            text-decoration:none;
+            color: black;
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- <img src="image/rose.jpg" alt=""> -->
+        <h1>there will be flowers</h1>
+    <ul id="flowers"></ul>
+    <script>
+       /* var favorite = 'Daffodil'
+        var intro = `<h1>there will be flowers</h1>
+        <p>My favorite is ${favorite} </p>`
+        document.querySelector('#flowers').innerHTML = intro */
+
+        var flowersLis = [
+            {
+                type: 'Roce',
+                color: ['red', 'blue', 'black'],
+                smell: 'mild',
+                price: 9,
+                url:'rose'
+            }, {
+                type: 'Lily',
+                color: ['white'],
+                smell: 'medium',
+                price: 9,
+                url:'lily'
+            }, {
+                type: 'Daffodil',
+                color: ['white', 'yellow'],
+                smell: 'strong',
+                price: 9,
+                url:'daffodil'
+            }, {
+                type: 'Lavender',
+                color: ['purple'],
+                smell: 'strong',
+                price: 9,
+                url:'lavender'
+            }, {
+                type: 'Chrysanthemum',
+                color: ['white', 'yellow', 'purple', 'pink'],
+                smell: 'mild',
+                price: 9,
+                url:'chrysanthemum'
+            }
+        ]
+
+        var tpl = ``
+        for(var i = 0 ; i < flowersLis.length; i++){
+            tpl +=(`
+            <li>
+            <a href="#product/ ${flowersLis[i]}">    
+			<h3>${flowersLis[i].type}</h3>
+			<p>color:${flowersLis[i].color}</p>
+			<p>smell: ${flowersLis[i].smell}</p>
+            <p>price:${flowersLis[1].price} $ </p>
+			<img src="image/${flowersLis[i].url}.jpg" />
+		</a>
+        </li>
+            `)
+        }
+        document.querySelector('#flowers').innerHTML = tpl;
+
+
+
+    </script>
+</body>
+
+</html>
