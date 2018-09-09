@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // 创造一个100项数字的数组
+        var arr = new Array(100).fill(1).map(item => parseInt(Math.random() * 100));
+
+        Array.prototype.swap = function (a, b) {
+            [arr[a], arr[b]] = [arr[b], arr[a]]
+        }
+        Array.prototype.bubbleSort = function () {
+            var len = this.length;
+            for (var i = 0; i < len - 1; i++) {
+                for (var j = 0; j < len - 1 - i; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        arr.swap(j, j + 1)
+                    }
+                }
+            }
+            return arr
+        }
+
+
+
+        Array.prototype.swap = function (a, b) {
+            [arr[a], arr[b]] = [arr[b], arr[a]]
+        }
+
+        /*冒泡算法的时间复杂度*/
+        /*平均情况和最坏情况 O(n^2) 无序数组*/
+        /*Bubble sort*/
+        var length = arr.length
+        for (var i = 0; i < length - 1; i++) {
+            for (var j = 0; j < length - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    arr.swap(j, j + 1)
+                }
+            }
+        }
+        console.log(arr);
+
+
+        /*最好情况 O(n)  本身就有顺序的数组 */
+        function bubble_sort2(arr) {
+            let _n = 0;
+            let len = arr.length;
+            let flag = 0;
+            for (let i = 0; i < len - 1; i++) {
+                for (let j = 0; j < len - 1 - i; j++) {
+                    _n++;
+                    if (arr[j] > arr[j + 1]) {
+                        let _data = arr[j];
+                        arr[j] = arr[j + 1];
+                        arr[j + 1] = _data;
+                        flag = 1;
+                    }
+                }
+                if (flag === 0) {
+                    break;
+                }
+            }
+            console.log('bubble_sort2总次数:', _n);
+        }
+
+
+
+        var arr = [
+            { name: 'a', score: 5 },
+            { name: 'b', score: 7 },
+            { name: 'c', score: 10 },
+            { name: 'd', score: 9 },
+            { name: 'e', score: 14 },
+            { name: 'f', score: 13 },
+            { name: 'g', score: 8 },
+            { name: 'h', score: 12 },
+            { name: 'i', score: 6 },
+        ]
+
+        Array.prototype.swap = function (a, b) {
+            [arr[a], arr[b]] = [arr[b], arr[a]];
+        }
+        var length = arr.length;
+        for (var i = 0; i < length - 1; i++) {
+            for (var j = 0; j < length - 1 - i; j++) {
+                if (arr[j].score > arr[j + 1].score) {
+                    arr.swap(j, j + 1);
+                }
+            }
+        }
+    </script>
+
+</body>
+
+</html>

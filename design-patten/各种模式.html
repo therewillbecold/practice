@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>工厂模式</h1>
+
+    <canvas id="myCanvas" width="500px" height="500px"></canvas>
+
+    <script>
+        /**
+         * 简单工厂模式是由一个方法来决定到底要创建哪个类的实例, 而这些实例经常都拥有相同的接口.
+         * 这种模式主要用在所实例化的类型在编译期并不能确定， 而是在执行期决定的情况。 
+         */
+
+        /**
+         * 简单工厂模式。 定义：用来创建一种类型的对象，
+         */
+
+        var myCanvas = document.getElementById('myCanvas')
+        var ctx = myCanvas.getContext('2d');
+        var w = myCanvas.width;
+        var h = myCanvas.height;
+        ctx.fillStyle = 'red';
+        var Ball = function (x, y, r) {
+            this.x = x;
+            this.y = y;
+            this.r = r;
+        }
+        Ball.prototype = {
+            draw: function () {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+                ctx.closePath();
+                ctx.fill();
+            }
+        }
+        function BallFactory() {
+            var x = Math.random() * w;
+            var y = Math.random() * h;
+            var r = Math.random() * 10 + 10;
+            var ball = new Ball(x, y, r);
+            return ball;
+        }
+        var ball = BallFactory();
+        ball.draw();
+        BallFactory().draw();
+
+
+        /**
+         * 单例模式
+         * 定义：只能被实例化一次的对象或方法。这样保证在系统中每次都是操作的同一个对象
+         * 适用场景, 如页面的mask遮罩, 每次都操作同一个遮罩层
+         */
+
+        /**
+         * 静态变量:
+         */
+
+        var conf = (function () {
+            var _conf = {
+                "name": "小明",
+                "age": 18
+            }
+            return function (str) {
+                return _conf[str];
+            }
+        })()
+
+        function People(name) {
+            this.name = name
+        }
+
+        // 只创建一个实例, 每次都使用该实例, 应用场景如手机键盘, 弹窗mask遮罩
+        var _instance = null;
+        function SinglePeople() {
+            if (!_instance) {
+                _instance = new People('小明')
+            }
+            return _instance
+        }
+
+        var p1 = SinglePeople()
+        var p2 = SinglePeople()
+
+        /**
+         * 观察者模式
+         * 定义，又叫消息系统，消息机制，或者发布订阅者模式。通过消息系统实现对象或者类之间的解耦。
+         * 优点:
+            1. 表现层与数据逻辑层分离, 一个数据层可以对应多个表现层, 当数据发生改变后通知所有监听的变现层更新状态. 
+            2. 将观察者和被观察对象之间解耦合.
+            3. 观察者模式支持广播通信
+            4. 该模式符合开闭原则的要求
+
+            缺点:
+            1. 观察对象太多的话, 会降低性能.
+            2. 观察者和被观察者之间相互发送消息, 容易形成循环依赖, 陷入死循环.
+            3. 观察者只能知道被观察者发生了变化, 却无法得知变化的细节, 不知道是怎么发生变化的 
+         */
+
+        //观察者模式中的消息传递,
+        //类似js中的二级事件绑定 oDiv.addEventListener("click",fn); 绑定监听
+        var Observer = (function () {
+            //__message : 消息管道,把订阅的消息保存起来
+            //结构类似
+            /*{
+                fn1 : [fn,fn],
+                fn2 : [fn]
+                ...
+            }*/
+            var __message = {};
+            return {
+
+                /**
+                 * 添加消息到消息管道
+                 * 订阅消息的方法
+                 * @type： 	表消息名称
+                 * @fn： 	消息的回调函数
+                  */
+                add: function (type, fn) {
+                    // 消息管道中的每条不同类型的消息都以数组形式保存
+                    if (__message[type]) {
+                        __message[type].push(fn);
+                    } else {
+                        __message[type] = [fn];
+                    }
+                    return this;
+                },
+                /**
+                 * 触发已经订阅过的消息
+                 * @type： 	表示消息类型
+                   * @data: 	表示消息调用时传递的参数
+                   */
+                fire: function (type, data) {
+                    if (__message[type]) {
+                        var e = {
+                            type: type,
+                            data: data
+                        }
+                        //让消息管道中保存的函数执行	
+                        for (var i = 0; i < __message[type].length; i++) {
+                            __message[type][i](e);
+                        }
+                    } else {
+                        throw new Error("");
+                    }
+                    return this; //方便链式调用			
+                },
+                /**
+                 * 取消消息订阅
+                 * @type: 	消息名称
+                 * @fn: 	消息的回调函数的名
+                 */
+                remove: function (type, fn) {
+                    //遍历消息系统,看下有没有该函数,有的话则删除该函数
+                    for (var i = __message[type].length - 1; i >= 0; i--) {
+                        if (__message[type][i] === fn) {
+                            __message[type].splice(i, 1)
+                        }
+                    }
+                    return this;
+                }
+            }
+        })()
+
+        function A() {
+            console.log('我是A, 赶紧到教室')
+        }
+
+        function B() {
+            console.log('啊, 点名了, 我是b, 赶紧到教室')
+        }
+
+        function C() {
+            console.log('啊, 点名了, 我是C, 赶紧到教室')
+        }
+        // 订阅消息
+        Observer.add('dianming', A)
+        Observer.add('dianming', B)
+        Observer.add('dianming', C)
+        // 触发消息
+        Observer.fire('dianming')
+        // 移除消息订阅
+        Observer.remove('dianming', C)
+
+    </script>
+</body>
+
+</html>

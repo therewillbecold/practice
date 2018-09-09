@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function fn(data) {
+            console.log(data);
+        }
+    </script>
+    <script src="1.txt"></script>
+    <script src="2.txt"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+
+<body>
+    <h1>JSONP (json with padding) </h1>
+    <p> 1 : script 标签 </p>
+    <p> 2 : 用script标签加载跨域资源是没有问题的 </p>
+    <p>在资源加载进来之前定义好一个函数,这个函数接受一个参数(数据),函数里面利用这个参数</p>
+    <button>按钮</button>
+    <script>
+        window.onload = function () {
+            function fn(data) {
+                console.log(data);
+            }
+            $('button').click(function () {
+                var nScript = document.createElement('script');
+                nScript.src = '2.txt';
+                document.body.appendChild(nScript);
+            })
+
+            console.log(test);
+            $('h1').css('color', 'teal');
+        }
+    </script>
+</body>
+
+</html>

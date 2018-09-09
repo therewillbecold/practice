@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            color: white;
+            text-align: center;
+            font-size: 30px;
+        }
+
+        h1 {
+            color: black;
+        }
+
+        .head {
+            width: 100%;
+            height: 40px;
+            text-align: center;
+            background: #efefef;
+            margin: 20px 0;
+            color: #222;
+        }
+
+        .layout {
+            margin: 10px;
+        }
+
+        .main {
+            background-color: lightseagreen;
+        }
+
+        .aside {
+            background-color: lightsalmon;
+        }
+
+        /* -------------------------layout1------------------------ */
+
+        .style1 {
+            overflow: hidden;
+            padding-left: 210px;
+        }
+
+        .style1 .leftAside {
+            float: left;
+            margin-left: -210px;
+            width: 200px;
+        }
+
+        .style1 .main {
+            float: right;
+            width: 100%;
+
+        }
+
+
+        /* -------------------------layout2------------------------ */
+
+        .style2 {
+            overflow: hidden;
+            padding-left: 210px;
+        }
+
+        .style2 .rightAside {
+            float: right;
+            width: 200px;
+        }
+
+        .style2 .main {
+            float: left;
+            width: 100%;
+            margin-left: -210px;
+
+        }
+
+        /* -------------------------layout3------------------------ */
+
+        .style3 {
+            overflow: hidden;
+            position: relative;
+            padding-left: 210px;
+            padding-right: 210px;
+        }
+
+        .style3 .main {
+            float: left;
+            width: 100%;
+
+        }
+
+        .style3 .leftAside {
+            float: left;
+            width: 200px;
+            margin-left: -100%;
+            position: relative;
+            left: -210px;
+        }
+
+        .style3 .rightAside {
+            float: right;
+            width: 200px;
+            position: relative;
+            margin-right: -210px;
+
+        }
+
+        /* -------------------------layout4------------------------ */
+        .style4 {
+            padding-left: 420px;
+            overflow: hidden;
+        }
+
+
+        .style4 .main {
+            width: 100%;
+            float: left;
+        }
+
+        .style4 .leftAside1 {
+            float: left;
+            width: 200px;
+            margin-left: -100%;
+            position: relative;
+            left: -420px;
+
+        }
+
+        .style4 .leftAside2 {
+            float: left;
+            width: 200px;
+            margin-left: -100%;
+            position: relative;
+            left: -210px;
+        }
+
+        /* -------------------------layout5------------------------ */
+
+        .style5 {
+            padding-right: 420px;
+            overflow: hidden;
+        }
+
+        .style5 .main {
+            width: 100%;
+            float: left;
+        }
+
+        .style5 .leftAside1 {
+            float: right;
+            width: 200px;
+            margin-left: -100%;
+            position: relative;
+            right: -420px;
+
+        }
+
+        .style5 .leftAside2 {
+            float: right;
+            width: 200px;
+            margin-left: -100%;
+            position: relative;
+            right: -210px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>圣杯布局系列</h1>
+    <!-- 布局分析:
+通常是2列或3列布局, 其中内容部分宽度自适应,两侧或一侧部分定宽.
+首先保证main部分优先渲染. 故html中main部分位于第一个.
+左中右部分都要设置浮动.
+利用父元素的padding留出固定部分的宽度.
+main部分设置宽度 100%
+两侧固定部分设置 margin 为负,使之浮动到上一层.
+再通过相对定位调整其位置到合适的部分. -->
+
+    <div class="head layout">头部</div>
+
+    <!--  -------------------------layout1------------------------  -->
+
+
+    <div class="style1 layout">
+        <div class="main">
+            <p>主内容栏自适应</p>
+        </div>
+        <div class="leftAside aside">
+            <p>侧边栏定宽</p>
+        </div>
+    </div>
+
+
+    <!--  -------------------------layout2------------------------  -->
+
+    <div class="style2 layout">
+        <div class="main">
+            <p>主内容栏自适应</p>
+        </div>
+        <div class="rightAside aside">
+            <p>侧边栏定宽</p>
+        </div>
+    </div>
+
+
+    <!--  -------------------------layout3------------------------  -->
+
+    <div class="style3 layout">
+        <div class="main">
+            <div class="content">主内容栏自适应</div>
+        </div>
+        <div class="leftAside aside">左侧定宽</div>
+        <div class="rightAside aside">右侧定宽</div>
+    </div>
+
+
+    <!--  -------------------------layout4------------------------  -->
+
+    <div class="style4 layout">
+        <div class="main">
+            <div class="content">主内容栏自适应</div>
+        </div>
+        <div class="leftAside1 aside">侧边栏定宽</div>
+        <div class="leftAside2 aside">侧边栏定宽</div>
+    </div>
+
+
+    <!--  -------------------------layout5------------------------  -->
+
+    <div class="style5 layout">
+        <div class="main">
+            <div class="content">主内容栏自适应</div>
+        </div>
+        <div class="leftAside1 aside">侧边栏定宽</div>
+        <div class="leftAside2 aside">侧边栏定宽</div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.circle{
+  width: 100px;
+  height: 100px;
+  background: darkblue;
+  border-radius: 50%;
+}
+
+.rect{
+  width: 100px;
+  height: 100px;
+  background: brown;
+}

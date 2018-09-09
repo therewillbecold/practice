@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            color: white;
+        }
+
+        h1,
+        h3 {
+            color: black;
+        }
+        .bird {
+            width: 100%;
+            height: 400px;
+            background-color: #efefef;
+        }
+
+        .birdBody {
+            width: 100%;
+            height: 100%;
+            float: left;
+            background-color: teal;
+        }
+
+        .center {
+            margin-left: 270px;
+            margin-right: 270px;
+        }
+
+        .left {
+            float: left;
+            width: 250px;
+            height: 100%;
+            background-color: lightsalmon;
+            margin-left: -100%;
+        }
+
+        .right {
+            float: left;
+            width: 250px;
+            height: 100%;
+            background-color: lightsalmon;
+            margin-left: -250px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1> 双飞翼布局 </h1>
+    <h3>双飞翼是由淘宝玉伯等前端大牛提出的一种多列布局方法，主要利用了浮动、负边距、相对定位三个布局属性，使三列布局就像小鸟一样，拥有中间的身体和两侧的翅膀。</h3>
+    <!-- 该布局可以保证中间main部分最先渲染.
+1. body部分在最前面, 下面依次是left,right
+2. 现设置鸟的身体body部分 宽100%, 并左浮动. 进行占位. 
+3. 再安放2个翅膀
+4. 设置left,right 定宽, 并且float:left; 
+5. left部分 margin-left : -100%; 可以使left占到上一层,并位于body上方左侧.
+6. 设置right部分 margin-left : -250px; 安放右翅膀
+7. 给body部分套个内容区, 通过设置body部分的padding调整内容区的位置, 使之不被左右两侧覆盖 -->
+
+    <div class="bird">
+        <div class="birdBody">
+            <div class="center">中间自适应</div>
+        </div>
+        <div class="left">左侧定宽</div>
+        <div class="right">右侧定宽</div>
+    </div>
+</body>
+
+</html>

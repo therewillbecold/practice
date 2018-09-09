@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        /**
+         * 观察者模式
+         * 定义，又叫消息系统，消息机制，或者发布订阅者模式。通过消息系统实现对象或者类之间的解耦。
+         * 优点:
+            1. 表现层与数据逻辑层分离, 一个数据层可以对应多个表现层, 当数据发生改变后通知所有监听的变现层更新状态. 
+            2. 将观察者和被观察对象之间解耦合.
+            3. 观察者模式支持广播通信
+            4. 该模式符合开闭原则的要求
+
+            缺点:
+            1. 观察对象太多的话, 会降低性能.
+            2. 观察者和被观察者之间相互发送消息, 容易形成循环依赖, 陷入死循环.
+            3. 观察者只能知道被观察者发生了变化, 却无法得知变化的细节, 不知道是怎么发生变化的 
+         */
+
+        //观察者模式中的消息传递,
+        //类似js中的二级事件绑定 oDiv.addEventListener("click",fn); 绑定监听
+        var Observer = (function () {
+            //__message : 消息管道,把订阅的消息保存起来
+            //结构类似
+            /*{
+                fn1 : [fn,fn],
+                fn2 : [fn]
+                ...
+            }*/
+            var __message = {};
+            return {
+
+                /**
+                 * 添加消息到消息管道
+                 * 订阅消息的方法
+                 * @type： 	表消息名称
+                 * @fn： 	消息的回调函数
+                  */
+                add: function (type, fn) {
+                    // 消息管道中的每条不同类型的消息都以数组形式保存
+                    if (__message[type]) {
+                        __message[type].push(fn);
+                    } else {
+                        __message[type] = [fn];
+                    }
+                    return this;
+                },
+                /**
+                 * 触发已经订阅过的消息
+                 * @type： 	表示消息类型
+                   * @data: 	表示消息调用时传递的参数
+                   */
+                fire: function (type, data) {
+                    if (__message[type]) {
+                        var e = {
+                            type: type,
+                            data: data
+                        }
+                        //让消息管道中保存的函数执行	
+                        for (var i = 0; i < __message[type].length; i++) {
+                            __message[type][i](e);
+                        }
+                    } else {
+                        throw new Error("");
+                    }
+                    return this; //方便链式调用			
+                },
+                /**
+                 * 取消消息订阅
+                 * @type: 	消息名称
+                 * @fn: 	消息的回调函数的名
+                 */
+                remove: function (type, fn) {
+                    //遍历消息系统,看下有没有该函数,有的话则删除该函数
+                    for (var i = __message[type].length - 1; i >= 0; i--) {
+                        if (__message[type][i] === fn) {
+                            __message[type].splice(i, 1)
+                        }
+                    }
+                    return this;
+                }
+            }
+        })()
+
+        // function A() {
+        //     console.log('我是A, 赶紧到教室')
+        // }
+
+        // function B() {
+        //     console.log('啊, 点名了, 我是b, 赶紧到教室')
+        // }
+
+        // function C() {
+        //     console.log('啊, 点名了, 我是C, 赶紧到教室')
+        // }
+        // // 订阅消息
+        // Observer.add('dianming', A)
+        // Observer.add('dianming', B)
+        // Observer.add('dianming', C)
+        // // 触发消息
+        // Observer.fire('dianming')
+        // // 移除消息订阅
+        // Observer.remove('dianming', C)
+        function Jane() {
+            console.log('whoops  i m so late ');
+        }
+        function Lisa() {
+            console.log('nooooo  i forgot about my id ');
+        }
+        function Bela() {
+            console.log('nooooo  i m sick today ');
+        }
+        // 订阅消息
+        Observer.add('checkIn', Jane)
+        Observer.add('checkIn', Lisa)
+        Observer.add('checkIn', Bela)
+        // 触发消息
+        Observer.fire('checkIn')
+        // 移除消息订阅
+        Observer.remove('checkIn', Bela);
+
+        Observer.fire('checkIn')
+
+        // var Observer = (function () {
+        //     var _message = {};
+        //     return {
+        //         add: function (type, fn) {
+        //             if (_message[type]) {
+        //                 _message[type].push(fn)
+        //             } else {
+        //                 _message[type] = fn[type]
+        //             }
+        //         },
+        //         fire: function (type, data) {
+        //             if (_message[type]) {
+        //                 var e = {
+        //                     type: type,
+        //                     data: data
+        //                 }
+        //                 //让消息管道中保存的函数执行	
+        //                 for (var i = 0; i < _message[type].length; i++) {
+        //                     _message[type][i](e);
+        //                 }
+        //             } else {
+        //                 throw new Error("");
+        //             }
+        //             return this; //方便链式调用			
+        //         },
+        //         remove: function (type, fn) {
+        //             for (var i = _message[type].length - 1; i >= 0; i--) {
+        //                 if (_message[type][i] === fn) {
+        //                     _message[type].splice(i, 1)
+        //                 }
+        //             }
+        //             return this;
+        //         }
+        //     }
+        // })();
+
+        // function Jane() {
+        //     console.log('whoops  i m so late ');
+        // }
+        // function Lisa() {
+        //     console.log('nooooo  i forgot about my id ');
+        // }
+        // function Bela() {
+        //     console.log('nooooo  i m sick today ');
+        // }
+        // // 订阅消息
+        // Observer.add('checkIn', Jane)
+        // Observer.add('checkIn', Lisa)
+        // Observer.add('checkIn', Bela)
+        // // 触发消息
+        // Observer.fire('checkIn')
+        // // 移除消息订阅
+        // Observer.remove('checkIn', Bela)
+    </script>
+</body>
+
+</html>

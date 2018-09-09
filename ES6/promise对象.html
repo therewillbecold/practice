@@ -51,9 +51,32 @@
         /* 此时我们对这两个promise对象监听, 2个promise全部完成之后才会调用后面的回调函数*/
         Promise.all([p1, p2]).then(function () {
             console.log('success');
-        },function(){
+        }, function () {
             console.log('failed');
         })
+
+
+        var createPromise = function (num) {
+            return new Promise((resolve, reject) => {
+                setTimeout(function () {
+
+                    if (num < 100) {
+                        resolve(num)
+                    } else {
+                        reject(num)
+                    }
+                }, 1000)
+            })
+        }
+
+        // promise链式调用
+        createPromise(10).then(res => console.log(111, res))
+            .then(res => console.log(222, res))
+            .then(res => console.log(333, res))
+            .then(res => { console.log(444, res); return createPromise(20) })
+            .then(res => { console.log(555, res); })
+            .then(res => console.log(666, res))
+            .catch(err => console.log(err)) // 捕获前面可能出现的错误
     </script>
 </body>
 

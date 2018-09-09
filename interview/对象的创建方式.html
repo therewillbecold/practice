@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*字面量*/
+        var obj = {};
+
+        /*Object构造函数*/
+        var obj = new Object();
+
+        /*使用工厂模式*/
+        function People(name, age, job) {
+            var o = new Object();
+            o.name = name;
+            o.age = age;
+            o.job = job;
+            o.greeting = function () {
+                console.log('I am a ' + this.job);
+            };
+            return o;
+        }
+        var person = People('Nike', 29, 'teacher');
+
+        /*使用构造函数*/
+        function People(name, age, job, greeting) {
+            this.name = name;
+            this.age = age;
+            this.job = job;
+            this.greeting = function () {
+                console.log('I am a ' + this.job);
+            };
+        }
+        var person = new People('ellen', 28, 'host')
+
+        /*原型创造对象*/
+        function Person() { }
+        Person.prototype.name = 'Nike';
+        Person.prototype.age = 30;
+        Person.prototype.job = 'teacher';
+        Person.prototype.greeting = function () {
+            console.log('I am a ' + this.job);
+        };
+        var person = new Person();
+        person.greeting()
+    </script>
+</body>
+
+</html>

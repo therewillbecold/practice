@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Ajax练习</h1>
+    <script src="axios.js"></script>
+    <script>
+        // 发送Ajax
+        // 原生Ajax
+        // readyState的几种状态 https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
+
+        /*产生一个xhr实例*/
+        var xhr = new XMLHttpRequest()
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log(xhr.responseText);
+            }
+        }
+        /*打开连接*/
+        xhr.open('get', '/fruits')
+        /*发送数据*/
+        xhr.send()
+
+        /*测试*/
+        Ajax('/fruits', 'get', '', res => {
+            console.log(res);
+        })
+
+        /*封装AJAX*/
+        function Ajax(url, method, data, callback) {
+            var xhr = new XMLHttpRequest()
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log(xhr.responseText);
+                }
+            }
+            xhr.open(method, url)
+            xhr.send(data)
+        }
+
+        function Ajax(url, method, dada, callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log(xhr.responseText);
+                }
+            }
+            xhr.open(methed, url);
+            xhr.send(data)
+        }
+
+
+        var arr = [
+            'get',
+            'post',
+            'put',
+            'delete'
+        ]
+
+        /* 封装更好用的一种方式, 支持 Ajax.get(url, data, callback)*/
+
+        arr.forEach(key => {
+            Ajax[key] = function (url, data, callback) {
+                Ajax(url, key, data, callback)
+            }
+        })
+
+
+        /*使用Axios来发送请求 https://github.com/axios/axios*/
+
+        axios.get('/fruits')
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+
+
+        axios.post('/fruits/add', {
+            name: 'banana',
+            color: 'yellow'
+        })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+
+
+        /* Fetch API 用法*/
+        fetch('/fruits', {
+            method: 'get',
+        })
+            .then(res => res.json())
+            .then(res => console.log(res))
+
+
+    </script>
+</body>
+
+</html>

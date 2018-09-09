@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        /**
+        * new 操作符做了什么事情
+        *
+        */
+        function Fruit(local, sweetness) {
+            this.local = local;
+            this.sweetness = sweetness;
+            this.juice = function () {
+                if (this.sweetness === 'sweet') {
+                    console.log('I\'m  good for making juice');
+                } else {
+                    console.log('Sorry, I\'m  not for juice');
+                }
+
+            }
+        }
+        
+        function myNew (fn, ...args) {
+            // 建立一个空对象
+            var obj = {}
+            // 该对象继承构造函数的原型
+            obj = Object.create(fn.prototype)
+            // 执行构造函数, 并把该对象绑定为this, 进行构造函数的继承
+            var res = fn.apply(obj, args)
+            // 判断构造函数返回值的类型, 如果没有返回值或返回值是值类型, 则返回第二步创建的这个空对象, 否则返回原构造函数的返回结果.
+            if (typeof res == 'undefined' || typeof res !== 'object') {
+                return obj
+            } else {
+                return res
+            }
+        }
+        
+        // var apple = new Fruit()
+        var apple = myNew(Fruit, '灵宝', '不甜')
+
+        console.log(apple);
+    </script>
+</body>
+</html>

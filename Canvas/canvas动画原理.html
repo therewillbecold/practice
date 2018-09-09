@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="600" height="400"></canvas>
+    <script>
+
+/*
+动画原理
+只要上屏就被像素化了。也就是说，一个东西如果想运动，必须重绘。
+canvas的动画原理：
+画一帧 → 全部擦除 → 重绘 → 全部擦除 → 重绘 → ……
+
+不运动的东西，也要跟着重绘。
+
+*/
+
+
+        //得到画布
+        var canvas = document.querySelector('#myCanvas')
+        //得到上下文
+        var ctx = canvas.getContext("2d");
+        var x = 0;
+        setInterval(function () {
+            //擦除所有画面。擦除矩形区域，参数和fillRect是一样的。
+            ctx.clearRect(0, 0, 600, 400);
+            //然后移动，小球移动
+            x++;
+            ctx.beginPath();
+            ctx.fillStyle = "teal";
+            ctx.arc(x, 100, 50, 0, 7, false);
+            ctx.closePath();
+            ctx.fill();
+
+            //下面这个方形不运动，也要跟着重绘：
+            ctx.fillStyle = "lightseagreen";
+            ctx.fillRect(200, 200, 100, 100);
+        }, 30)
+    </script>
+</body>
+
+</html>

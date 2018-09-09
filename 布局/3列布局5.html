@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            color: white;
+        }
+
+        h1,
+        h3 {
+            color: black;
+        }
+
+        .layout {
+            width: 100%;
+            height: 400px;
+            background-color: #efefef;
+            display: flex;
+            flex-flow: row;
+        }
+
+        .left {
+            width: 250px;
+            height: 100%;
+            background-color: lightsalmon;
+        }
+
+        .right {
+            width: 250px;
+            height: 100%;
+            background-color: lightsalmon;
+        }
+
+        .center {
+            flex: 1;
+            background-color: #efefef;
+            padding: 0 20px;
+        }
+
+        .content {
+            background-color: lightseagreen;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>flex布局</h1>
+    <!-- 
+    利用弹性盒实现.
+    父盒子设置 display:flex;
+    同时设置 flex-flow : row;
+    左右设置定宽.
+    中间设置 flex:1; 即可自适应宽度. -->
+    <div class="layout">
+        <div class="left">左侧定宽</div>
+        <div class="center">
+            <div class="content">中间自适应</div>
+        </div>
+        <div class="right">右侧定宽</div>
+
+    </div>
+</body>
+
+</html>

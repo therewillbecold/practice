@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        /*快排算法的时间复杂度*/
+        /*最好情况 O(n*log(n))   最坏情况O(n^2)如果数组本身有序 n*log2(n) 
+          若2的x次方等于n，那么x就是等于log2(n)。2是底数，n是幂，x是指数。*/
+        /*快排算法*/
+        var arr = new Array(100).fill(1).map(item => parseInt(Math.random() * 100))
+        Array.prototype.quickSort = function () {
+            let length = this.length;
+            if (length < 2) return this;
+            let pivot = this[0], right = [], left = [];
+            for (var i = 1; i < length; i++) {
+                var vi = this[i];
+                vi >= pivot && right.push(vi);
+                vi < pivot && left.push(vi);
+            }
+            return left.quickSort().concat(pivot, right.quickSort());
+        }
+        console.log(arr.quickSort());
+
+
+
+
+        Array.prototype.quickSort = function () {
+            let len = this.length;
+            if (len < 2) return this;
+            let pivot = this[0], right = [], left = [];
+            for (var i = 1; i < len; i++) {
+                let vi = this[i];
+                vi >= pivot && right.push(vi);
+                vi < pivot && left.push(vi);
+            }
+            return left.quickSort().concat(pivot, right.quickSort());
+        }
+
+        /*反面案例:师傅的复杂版快排算法*/
+        // Array.prototype.swap = function (a, b) {
+        //     var _a = arr[a]
+        //     arr[a] = arr[b]
+        //     arr[b] = _a
+        // }
+
+        // var arr = new Array(100).fill(1).map(item => parseInt(100 * Math.random()))
+
+        //         let arr = [];
+        // let n = 100;
+        // for (let i = 0; i < n; i++) {
+        // 	arr.push(parseInt(Math.random() * 100));
+        // }
+
+        // 快排
+        // function Interator (LeftIndex, RightIndex) {
+        //     if (RightIndex <= LeftIndex ) {
+        //         return;
+        //     }
+        //     // 1. 随便确定一个当前范围内的值为基准值, 我们让最右侧的值作为基准值
+        //     var PivotValue = arr[RightIndex]
+        //     var PivotIndex = RightIndex
+        //     // 2. 定义storeIndex为Left序号, storeIndex
+        //     var storeIndex = LeftIndex
+        //     // 3. 循环 从 leftIndex到 RightIndex - 1
+        //     for (var i = LeftIndex; i <= RightIndex; i++) {
+        //         if (arr[i] < PivotIndex) {
+        //             arr.swap(storeIndex, i)
+        //             storeIndex++
+        //         }
+        //     }
+        //     // 4. storeIndex 和 RightIndex 交换
+        //     arr.swap(storeIndex, RightIndex)
+        //     // 5. 让storeIndex, 左右侧的值分别执行上述过程
+        //     Interator(LeftIndex, storeIndex - 1)
+        //     Interator(storeIndex + 1, RightIndex)
+        // }
+
+
+        // Interator(0, arr.length - 1)
+        //     console.log(arr);
+
+
+        // Iterator2(0, arr.length - 1, 0);
+
+        // function Iterator2 (left, right, pivotIndex) {
+        //     if (right <= left) {
+        //         return;
+        //     }
+        //     let pivotVal = arr[pivotIndex];
+        //     let storeIndex = left;
+        //     [arr[right], arr[pivotIndex]] = [arr[pivotIndex], arr[right]]; // 把基准元素移到最右侧
+        //     for (let i = left; i < right - 1; i++) {
+        //         if (arr[i] < pivotVal) {
+        //             [arr[storeIndex], arr[i]] = [arr[i], arr[storeIndex]]; // 把小的元素依次放到左侧,下标递增.
+        //             storeIndex++;
+        //         }
+        //     }
+        //     [arr[right], arr[storeIndex]] = [arr[storeIndex], arr[right]]; // 从左到右循环结束后把基准值放到storeIndex的位置.
+        //     // 递归调用分别处理左右侧的数据
+        //     Iterator2(left, storeIndex - 1, left);
+        //     Iterator2(storeIndex + 1, right, right);
+        // }
+
+        // console.log(arr);
+
+    </script>
+
+</body>
+
+</html>

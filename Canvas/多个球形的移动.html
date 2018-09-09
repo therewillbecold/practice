@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+            margin: 100px 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="600" height="400"></canvas>
+    <script src="js/underscore.js"></script>
+    <script>
+        var canvas = document.querySelector('#myCanvas');
+        var ctx = canvas.getContext('2d');
+
+        function Ball(x, y, r, color) {
+            this.x = x;
+            this.y = y;
+            this.r = r;
+            this.color = color;
+            /*自己把自己添加到演员数组中*/
+            window.actors.push(this)
+        }
+
+        Ball.prototype.render = function () {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.r, 0, 7, false);
+            ctx.closePath();
+            ctx.fillStyle = this.color;
+            ctx.fill();
+        }
+
+
+        Ball.prototype.update = function () {
+            this.x += 5;
+            /*如果自己的x超过了画布的width*/
+            if (this.x > window.canvas.width) {
+                /*让球自杀。所谓的自杀，就是从actors数组中，把自己删除。
+       我们使用underscore提供的API，without函数：_.width(array,m)从数组中删除值为m的项。*/
+                actors = _.without(actors, this);
+            }
+        }
+
+
+        /*创造一个演员数组，这个数组里面存放着动画中所有演员，这些对象都有update和render方法*/
+        var actors = [];
+        new Ball(100, 50, 10, 'olive')
+        new Ball(100, 100, 10, 'seagreen')
+        new Ball(100, 150, 10, 'teal')
+        new Ball(100, 200, 10, 'teal')
+
+
+        /*定时器中，每帧都要调用小球的更新方法、渲染方法*/
+        setInterval(function () {
+            /*清除画布*/
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            /*遍历演员数组，让数组中的每个对象都要update、render*/
+            _.each(actors, function (i) {
+                i.update();
+                i.render();
+            })
+        }, 30);
+
+    </script>
+</body>
+
+</html>

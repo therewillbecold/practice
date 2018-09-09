@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 5px solid rgb(119, 112, 112);
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="myCanvas" width='600px' height="400px"></canvas>
+    <script>
+        /**
+        * 简单工厂模式是由一个方法来决定到底要创建哪个类的实例, 而这些实例经常都拥有相同的接口.
+        * 这种模式主要用在所实例化的类型在编译期并不能确定， 而是在执行期决定的情况。
+        * 定义：用来创建一种类型的对象. 
+        */
+
+        var myCanvas = document.getElementById('myCanvas');
+        var ctx = myCanvas.getContext('2d');
+        var w = myCanvas.width;
+        var h = myCanvas.height;
+        ctx.fillStyle = 'red';
+        var Ball = function (x, y, r) {
+            this.x = x;
+            this.y = y;
+            this.r = r;
+        }
+        Ball.prototype = {
+            draw: function () {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+                ctx.closePath();
+                ctx.fill();
+            }
+        }
+        function BallFactory() {
+            var x = Math.random() * w;
+            var y = Math.random() * h;
+            var r = Math.random() * 10 + 10;
+            var ball = new Ball(x, y, r);
+            return ball
+        }
+        var ball = BallFactory()
+        ball.draw();
+        BallFactory().draw();
+
+
+    </script>
+</body>
+
+</html>

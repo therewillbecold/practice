@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        /*定义一个动物类*/
+        function Animal(name, color) {
+            // 属性
+            this.name = name || 'Animal';
+            this.color = ['orange', 'black', 'white']
+            // 实例方法
+            this.sleep = function () {
+                console.log(this.name + ' is sleeping ');
+            }
+        }
+        // 原型方法
+        Animal.prototype.eat = function (food) {
+            console.log(this.name + ' is eating ' + food);
+        };
+
+
+        /*原型链继承*/
+        /*核心： 将父类的实例作为子类的原型*/
+        function Cat() {
+        }
+        Cat.prototype = new Animal('Kitty')
+
+        //Test
+        var kitty = new Cat();
+        console.log(cat.name);
+        var Gaffey = new Cat();
+        Gaffey.color
+        kitty.color.push('gray'); //原型对象的引用属性是所有实例共享的
+        console.log(cat.eat('fish'));
+        console.log(cat instanceof Animal); //true 
+        console.log(cat instanceof Cat); //true
+        /*父亲构造函数中的对象都会添加到子类的原型上, 当父对象构造函数中的属性是引用类型时,子类的实例化对象会引用同一个内存地址上的该属性.
+         因此修改一个子类实例的引用类型的属性时会影响到其他的子类实例.*/
+
+
+
+        /*
+        原型链继承能够实现对父类的继承.
+
+        原型链继承方式的缺陷:
+
+        父亲构造函数中的对象都会添加到子类的原型上, 当父对象构造函数中的属性是引用类型时,子类的实例化对象会引用同一个内存地址上的该属性. 因此修改一个子类实例的引用类型的属性时会影响到其他的子类实例.
+
+        在创建子类的实例时,无法向父类的构造函数中添加参数.
+
+        由于这些问题, 单独的原型继承很少用.
+        */
+
+
+
+        /*构造函数式继承*/
+        /*为了解决原型中包含引用类型所带来的继承性问题. 出现了构造函数式继承.*/
+        function Super(val) {
+            this.val = val;
+            this.arr = [1];
+            // 由于闭包, 该函数无法复用, 每个实例都会得到一个新的函数.
+            this.fn = function () {
+            }
+        }
+        function Sub(val) {
+            Super.call(this, val, arr, fn);
+        }
+
+
+    </script>
+</body>
+
+</html>

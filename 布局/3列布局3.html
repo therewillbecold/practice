@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            color: white;
+        }
+
+        h1,
+        h3 {
+            color: black;
+        }
+
+        .layout {
+            width: 100%;
+            height: 400px;
+            background-color: #efefef;
+        }
+
+        .left {
+            float: left;
+            width: 200px;
+            height: 100%;
+            background-color: lightsalmon;
+        }
+
+        .right {
+            float: right;
+            width: 250px;
+            height: 100%;
+            background-color: lightsalmon;
+        }
+
+        .center {
+            overflow: hidden;
+            height: 100%;
+            background-color: teal;
+            padding: 0 20px;
+            background-color: #efefef;
+        }
+
+        .center .content {
+            height: 100%;
+            background-color: teal;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>3列布局,左右定宽,中间自适应</h1>
+    <h3> 利用BFC: BFC不会与浮动元素叠加, 利用此特性完成该布局 左右元素分别左右浮动, 中间元素放在最后渲染, 并设置overfolow:hidden</h3>
+    <div class="layout">
+        <div class="left">左侧定宽</div>
+        <div class="right">右侧定宽</div>
+        <div class="center">
+            <div class="content">中间自适应</div>
+        </div>
+    </div>
+</body>
+
+</html>

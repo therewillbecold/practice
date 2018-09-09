@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>server 6100</h1>
+    <script src="jsonp.js"></script>
+    <script>
+        MyJsonP('http://localhost:6500/jsonp', {
+            name: '哈哈'
+        }, function (data) {
+            console.log('json请求成功,数据是:', data);
+        })
+    </script>
+</body>
+
+</html>

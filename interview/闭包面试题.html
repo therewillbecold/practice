@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 闭包: 
+   函数在定义的时候会把函数体以及其所处的上下文环境封装为一个封闭的实体, 
+   当函数在任何地方被调用的时候其中的变量会到其定义时的上下文作用域中找值*/
+
+
+        /*下面这段代码想要循环延时输出结果0 1 2 3 4,请问输出结果是否正确,
+        如果不正确,请说明为什么,并修改循环内的代码使其输出正确结果*/
+
+        for (var i = 0; i < 5; i++) {
+            setTimeout(function () {
+                /* 函数在定义的时候其中的 i 值为0 - 4
+                函数在被调用的时候i的值为 5
+                由此可见 函数中使用到的变量的值与定义时无关, 在调用时决定.*/
+                console.log(i + ' ');
+            }, 100);
+        }
+        //5,5,5,5,5
+
+
+        /*不能输出正确结果，因为循环中setTimeout接受的参数函数通过闭包访问变量i。
+        javascript运行环境为单线程，setTimeout注册的函数需要等待线程空闲才能执行，此时for循环已经结束，i值为5.五个定时输出都是5 
+        修改方法：将setTimeout放在函数立即调用表达式中，将i值作为参数传递给包裹函数，创建新闭包*/
+        for (var i = 0; i < 5; i++) {
+            (function (i) {
+                setTimeout(function () {
+                    console.log(i + ' ');
+                }, 100);
+            }(i));
+        }
+    </script>
+</body>
+
+</html>

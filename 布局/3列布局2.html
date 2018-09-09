@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            color: white;
+        }
+
+        h1,
+        h3 {
+            color: black;
+        }
+
+        .layout {
+            width: 100%;
+            height: 400px;
+            background-color: #efefef;
+        }
+
+        .left {
+            float: left;
+            width: 200px;
+            height: 100%;
+            background-color: lightsalmon;
+        }
+
+        .right {
+            float: right;
+            width: 250px;
+            height: 100%;
+            background-color: lightsalmon;
+        }
+
+        .center {
+            height: 100%;
+            background-color: seagreen;
+            margin: 0 270px 0 220px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>左右定宽度, 中间自适应</h1>
+    <h3>center元素放到最后渲染, 宽度100% 通过设置 margin 把内容调整到合适位置. 左右设置float</h3>
+    <div class="layout">
+        <div class="left">左侧定宽</div>
+        <div class="right">右侧定宽</div>
+        <div class="center">中间自适应</div>
+    </div>
+</body>
+
+</html>

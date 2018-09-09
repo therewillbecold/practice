@@ -4,10 +4,12 @@ import ReactDOM from 'react-dom';
 // import './base/components'
 // import './base/clock'
 // import './base/lifecycle'
-import './base/style'
+// import './base/style'
 // import './base/form'
+// import './base/form1'
 // import './antd/firstAnt'
-import './antd/secAnt'
+// import './antd/secAnt'
+import './base/canvas'
 
 import App from './App';
 

@@ -23,13 +23,13 @@ class Form extends React.Component {
                     <label>
                         Country:
                         <select value={this.state.country} onChange={(event) => this.setState({ country: event.target.value })}>
-                        <option value="China">China</option>
-                        <option value="US">US</option>
-                        <option value="UK">UK</option>
-                        <option value="Italy">Italy</option>
-                        <option value="Spain">Spain</option>
-                        <option value="France">France</option>
-                        <option value="Germany">Germany</option>
+                            <option value="China">China</option>
+                            <option value="US">US</option>
+                            <option value="UK">UK</option>
+                            <option value="Italy">Italy</option>
+                            <option value="Spain">Spain</option>
+                            <option value="France">France</option>
+                            <option value="Germany">Germany</option>
                         </select>
                     </label>
                 </p>
@@ -42,47 +42,78 @@ class Form extends React.Component {
     }
 }
 
-// class Form extends React.Component {
-//     state = {
-//         username: '',
-//         country: 'India'
-//     }
-//     usernameChange = event => {
-//         this.setState({ username: event.target.value })
-//     }
-//     render() {
-//         return <div>
-//             <div className="form">
-//                 <p>
-//                     <label>
-//                         username:
-//                         <input type="text" placeholder="username" value={this.state.username} onChange={this.usernameChange} />
-//                     </label>
-//                 </p>
-//                 <p>
-//                     <label>
-//                         country:
-//                         <select value={this.state.country} onChange={event => this.setState({ country: event.target.value })}>
-//                             <option value="China">China</option>
-//                             <option value="US">US</option>
-//                             <option value="UK">UK</option>
-//                             <option value="India">India</option>
-//                         </select>
-//                     </label>
-//                 </p>
-//             </div>
+class MyInput extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            text: props.init || ''
+        }
+    }
 
-//             <div className="display">
-//                 <p>用户名: {this.state.username}</p>
-//                 <p>country: {this.state.country}</p>
-//             </div>
+    changeHandler = event => {
+        console.log('beforeSetState');
+        const value = event.target.value
+        this.setState({
+            text: value
+        }, () => {
+            console.log('setState-callback');
+            this.props.onChange(value)
+        })
+        console.log('afterSetState');
+    }
+    componentDidMount() {
+        console.log('MyInput-this:', this);
+        console.log('MyInput-props:', this.props);
+    }
+    render() {
+        console.log('render');
+        return <div>
+            <div>
+                <input value={this.state.text} onChange={this.changeHandler} type="text" placeholder="随便输入" />
+            </div>
+        </div>
+    }
+}
 
-//         </div>
-//     }
-// }
+class Add extends React.Component {
+    state = {
+        num1: 0,
+        num2: 0
+    }
+    init = {
+        num1: 0,
+        num2: 0,
+    }
+    changeHandler_num1 = (val) => {
+        this.setState({
+            num1: val
+        })
+    }
+    changeHandler_num2 = (val) => {
+        this.setState({
+            num2: val
+        })
+    }
+    render() {
+        return <div className="add">
+            <h3>加法</h3>
+            <div>
+                <MyInput init={this.init.num1} onChange={this.changeHandler_num1}></MyInput>
+                <span>+</span>
+                <MyInput init={this.init.num2} onChange={this.changeHandler_num2}></MyInput>
+                <span>=</span>
+                <span>{Number(this.state.num1) + Number(this.state.num2)}</span>
+            </div>
+        </div>
+    }
+}
+
+
+
 
 const ele = <div>
     <Form></Form>
+    <Add></Add>
 </div>
 
 ReactDOM.render(ele, document.querySelector('#form'))

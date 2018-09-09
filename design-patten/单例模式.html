@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+          * 单例模式
+          * 定义：只能被实例化一次的对象或方法。这样保证在系统中每次都是操作的同一个对象
+          * 适用场景, 如页面的mask遮罩, 每次都操作同一个遮罩层
+          */
+
+        /* 静态变量: */
+
+        /* 立即执行函数*/
+        var confirm = (function () {
+            var _confirm = {
+                'name': 'joker',
+                'age': 'unknown'
+            }
+            return function (str) {
+                console.log(str);
+                return _confirm[str];
+            }
+        })();
+
+        confirm('name');
+
+        function People(name) {
+            this.name;
+        }
+
+        /* 只生成一个实例, 多次调用SinglePeople都使用同一个实例,每次都使用该实例, 应用场景如手机键盘, 弹窗mask遮罩*/
+        var _instance = null;
+        function SinglePeople() {
+            if (!_instance) {
+                _instance = new People('joker');
+            }
+            return _instance;
+        }
+
+        var p1 = SinglePeople();
+        var p2 = SinglePeople();
+
+    </script>
+</body>
+
+</html>

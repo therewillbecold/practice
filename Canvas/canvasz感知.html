@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="myCanvas" width='500' height='500'><img src="image/rose.jpg" id="img"></canvas>
+    
+    <script>
+        /*canvas 元素本身是没有绘图能力的. 所有的绘制工作必须在 JavaScript 内部完成.*/
+
+        // 找到 <canvas> 元素:
+        var canvas = document.getElementById('myCanvas')
+        //创建 context 对象：
+        var ctx = canvas.getContext('2d');
+
+        // 设置fillStyle属性可以是CSS颜色，渐变，或图案
+        ctx.fillStyle = "teal"; //设置或返回用于填充绘画的颜色、渐变或模式
+
+
+        //fillRect(x,y,width,height) 
+        ctx.fillRect(0, 0, 100, 100);
+        ctx.strokeStyle = "#0000ff";
+        ctx.strokeRect(100, 100, 100, 100);
+
+        //路径画方
+        ctx.beginPath();
+        ctx.moveTo(200, 200);
+        ctx.lineTo(200, 300);
+        ctx.lineTo(300, 300);
+        ctx.lineTo(300, 200);
+        ctx.closePath();
+        ctx.stroke();
+        ctx.fill()
+
+
+        //圆 arc(x,y,r,start,stop)
+        ctx.beginPath();
+        ctx.arc(50, 50, 40, 0, 2 * Math.PI);
+        ctx.stroke();
+
+
+        //文本 font - 定义字体
+        // fillText(text, x, y) - 实心的文本
+        // strokeText(text, x, y) - 空心的文本
+        ctx.font = "30px Arial";
+        ctx.strokeText('jane', 250, 250)
+
+
+
+
+        // createLinearGradient(x,y,x1,y1) - 创建线条渐变
+        // createRadialGradient(x,y,r,x1,y1,r1) - 创建一个径向/圆渐变
+        // 创建渐变
+        var grd = ctx.createLinearGradient(0, 0, 100, 0);
+        grd.addColorStop(0, "gray");
+        grd.addColorStop(1, "white");
+
+        // 填充渐变
+        ctx.fillStyle = grd;
+        ctx.fillRect(10, 10, 50, 50);
+
+        //	向画布上绘制图像、画布或视频
+        var img = document.getElementById("img");
+        ctx.drawImage(img, 10, 10);
+
+    </script>
+</body>
+
+</html>

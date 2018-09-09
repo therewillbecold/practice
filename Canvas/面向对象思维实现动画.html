@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="600" height="400"></canvas>
+    <script>
+
+        //得到画布
+        var canvas = document.querySelector('#myCanvas')
+        //得到上下文
+        var ctx = canvas.getContext("2d");
+
+        //球的构造函数
+        function Ball(x, y, r, color) {
+            this.x = x;
+            this.y = y;
+            this.r = r;
+            this.color = color;
+        }
+
+        //球渲染方法
+        Ball.prototype.render = function () {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y,this.r, 0, 7, false);
+            ctx.closePath();
+            ctx.fillStyle = this.color;
+            ctx.fill();
+        }
+
+      //球的更新方法
+      Ball.prototype.update = function(){
+          this.x ++;
+      }
+
+    //实例化一个小球
+    var ball = new Ball(100,100,25,'teal');
+    var ball1 = new Ball(50,200,25,'teal');
+
+    //定时器中，每帧都要调用小球的更新方法、渲染方法
+    setInterval(function(){
+        //清除画布
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        //先更新然后渲染
+        ball.update();
+        ball.render();
+        ball1.update();
+        ball1.render();
+    },30)
+
+    </script>
+</body>
+
+</html>
