@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
     <h1>test</h1>
     <iframe src="http://localhost:3500/sub.html" frameborder="0"></iframe>
@@ -13,10 +15,20 @@
     <script src="jsonp.js"></script>
     <script src="http://localhost:3000/api/books"></script>
     <script>
-        axios.get('http://localhost:3000/api/music')
-    .then(res => console.log(res))
+        axios.get('http://localhost:3000/api/music', {
+            params: {
+                id: 1,
+                name: '稻香'
+            }
+        })
+            .then(res => console.log(res))
 
-    
+        axios.post('http://localhost:3000/api/music', {
+            id: 1,
+            name: '稻香'
+        })
+            .then(res => console.log(res))
+
     </script>
 
     <script>
@@ -28,4 +40,5 @@
         })
     </script>
 </body>
+
 </html>

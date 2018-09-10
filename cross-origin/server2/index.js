@@ -20,6 +20,6 @@ app.use(async (ctx, next) => {
 app.use(logger())
 app.use(json())
 app.use(bodyParser())
-// app.use(cors())
+app.use(cors())
 app.use(router)
 app.listen(port, res => console.log('服务启动, 监听' + port));

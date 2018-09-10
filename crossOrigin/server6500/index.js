@@ -2,9 +2,14 @@ import Koa from 'koa'
 import Router from 'koa-router'
 import fs from 'fs'
 import path from 'path'
+import websockify from 'koa-websocket'
+
 const port = 6500;
-const app = new Koa();
+
+const app = websockify(new Koa());
+
 const router = new Router();
+const routerWs = new Router()
 
 function readFile(fileDir) {
     return new Promise((resolve, reject) => {
@@ -106,7 +111,35 @@ router.get('/jsonp', async (ctx) => {
     ctx.body = `${callbackName}(${JSON.stringify(data)})`
 })
 
+let chats = [], wsClients = []
+
+routerWs.all('/ws/chatroom', async function (ctx) {
+    // `ctx` is the regular koa context created from the `ws` onConnection `socket.upgradeReq` object.
+    // the websocket is added to the context on `ctx.websocket`.
+    console.log('websocket:', ctx.websocket);
+    wsClients.push(ctx.websocket)
+    ctx.websocket.send(JSON.stringify({
+        statue: 0,
+        message: 'connect'
+    }));
+    ctx.websocket.on('message', function(message) {
+      // do something with the message from client
+          console.log('receive:', message);
+          chats.push(message)
+          wsClients.forEach(client => {
+              if (client.readyState == 1) {
+                client.send(JSON.stringify({
+                    statue: 0,
+                    message: chats
+                }))
+              }
+           
+          })
+      
+    });
+  })
 
 
+app.ws.use(routerWs.routes());
 app.use(router.routes())
 app.listen(port, res => { console.log('服务启动,监听' + port); })

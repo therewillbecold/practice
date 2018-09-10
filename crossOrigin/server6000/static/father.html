@@ -1,12 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+	<meta charset="UTF-8">
+	<title>iframe练习</title>
 </head>
 <body>
-    <h1>father</h1>
+<button type="button" onclick="openNew()">新窗口打开</button>
+
+<h3>iframe练习</h3>
+<label for="msg">
+要发送的数据
+	<input type="text" id="msg">
+</label>
+<p>
+<button type="button" id="btn">发送数据</button>
+</p>
+<h3>接受到的子iframe中的数据</h3>
+<p id="receiveMsg"></p>
+<!-- 
+frameborder 是否显示边框0不显示, 1显示 
+scrolling: yes, no, auto. 是否显示滚动条
+seamless 规定 <iframe> 看上去像是包含文档的一部分
+srcdoc: html字符串, iframe中显示的页面html内容
+-->
+
+<iframe 
+	id="childIframe"
+	width="300px"
+	height="400px" 
+	src="./child.html"
+	frameborder="1"
+	name="childIframe"
+	scrolling="yes"
+	seamless
+></iframe>
+<script type="text/javascript">
+	var newWin;
+	function parentSay () {
+		console.log('parentSay');	
+	}
+	let btn = document.getElementById("btn");
+	let inp = document.getElementById("msg");
+	let iFrame = document.getElementById("childIframe").contentWindow;
+	let receiveMsg = document.getElementById("receiveMsg");
+	btn.onclick = postMsg;
+	function postMsg () {
+		console.log(iFrame);
+		iFrame.postMessage(inp.value, '*');
+		if (newWin) {
+			newWin.postMessage(inp.value, '*');
+		}
+	}
+	window.onmessage = function (e) {
+		receiveMsg.innerHTML = e.data;
+	}
+	function openNew () {
+		window.newWin = window.open('./iframe2.html', 'iframe-new2')
+	}
+</script>
+	
 </body>
 </html>

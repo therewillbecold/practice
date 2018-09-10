@@ -1,12 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+	<meta charset="UTF-8">
+	<title>Document</title>
 </head>
 <body>
-    <h1>child</h1>
+	<h3>我是Iframe中的内容</h3>
+	<p>
+		<input type="text" id="inp">
+	</p>
+	<p>
+		<button type="button" id="postBtn">发送数据</button>
+	</p>
+	<p id="parentMsg">
+		
+	</p>
+
+	<div class="1">01</div>
+	<div class="2">02</div>
+	<div class="3">03</div>
+	<div class="4">04</div>
+	<div class="5">05</div>
+	<div class="6">06</div>
+	<div class="7">07</div>
+	<div class="8">08</div>
+	<div class="9">09</div>
+	<div class="10">10</div>
+	<div class="1">哈哈1</div>
+	<div class="2">哈哈2</div>
+	<div class="3">哈哈3</div>
+	<div class="4">哈哈4</div>
+	<div class="5">哈哈5</div>
+	<div class="6">哈哈6</div>
+	<div class="7">哈哈7</div>
+	<div class="8">哈哈8</div>
+	<div class="9">哈哈9</div>
+	<div class="10">哈哈10</div>
+	<div class="11">哈哈11</div>
+	<div class="12">哈哈12</div>
+	<div class="13">哈哈13</div>
+	<div class="14">哈哈14</div>
+	<div class="15">哈哈15</div>
+	<div class="16">哈哈16</div>
+	<div class="17">哈哈17</div>
+	<div class="18">哈哈18</div>
+	<div class="19">哈哈19</div>
+	<div class="20">哈哈20</div>
+	<script type="text/javascript">
+	console.log('iframe', window);			
+	let inp = document.getElementById("inp");
+	window.onmessage = function (e) {
+		console.log('child-onmessage:', e.data);
+		document.getElementById("parentMsg").innerHTML = e.data;
+	}
+	document.getElementById("postBtn").onclick = function () {
+		window.parent.postMessage(inp.value, "*")
+		if (window.opener) {
+			window.opener.postMessage(inp.value, "*")
+		}
+		
+	}
+	</script>
 </body>
 </html>

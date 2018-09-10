@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*this的指向在函数定义的时候是确定不了的，只有函数执行的时候才能确定this到底指向谁，
+        实际上this的最终指向的是那个调用它的对象*/
+
+        /*--------------------案例一--------------------*/
+        function fn() {
+            var user = 'jane'
+            console.log('案例一: ' + this.user);  //
+            console.log('案例一: ' + this);   //window
+        }
+        fn();
+        window.fn()
+
+
+
+
+        /*这里的this指向的是对象obj，因为你调用这个fn是通过obj.fn()执行的，那自然指向就是对象obj.
+        这里再次强调一点，this的指向在函数创建的时候是决定不了的，在调用的时候才能决定，谁调用的就指向谁，一定要搞清楚这个。*/
+
+        /*--------------------案例二--------------------*/
+        var obj1 = {
+            user: 'jane',
+            fn: function () {
+                console.log('案例二: ' + this.user);
+            }
+        }
+        obj1.fn()  // this.user: jane
+
+
+        /*其实例子1和例子2说的并不够准确，下面这个例子就可以推翻上面的理论。
+        如果要彻底的搞懂this必须看接下来的几个例子*/
+
+        /*--------------------案例三--------------------*/
+        var obj2 = {
+            user: 'jane',
+            fn: function () {
+                console.log('案例三: ' + this.user);
+            }
+        }
+        window.obj2.fn()
+
+
+        /*这段代码和上面的那段代码几乎是一样的，但是这里的this为什么不是指向window，
+        如果按照上面的理论，最终this指向的是调用它的对象，
+        这里先说个而外话，window是js中的全局对象，我们创建的变量实际上是给window添加属性，所以这里可以用window点obj对象。
+        这里先不解释为什么上面的那段代码this为什么没有指向window，我们再来看一段代码。*/
+
+        /*--------------------案例四--------------------*/
+        var obj3 = {
+            a: 'how',
+            b: {
+                a: 'are',
+                fn: function () {
+                    console.log('案例四: ' + this.a);
+                }
+            }
+        }
+        obj3.b.fn()
+
+
+
+        /*这里同样也是对象obj点出来的，但是同样this并没有执行它，那你肯定会说我一开始说的那些不就都是错误的吗？其实也不是，只是一开始说的不准确，接下来我将补充一句话，我相信你就可以彻底的理解this的指向的问题。
+
+　　情况1：如果一个函数中有this，但是它没有被上一级的对象所调用，那么this指向的就是window，这里需要说明的是在js的严格版中this指向的不是window，但是我们这里不探讨严格版的问题，你想了解可以自行上网查找。
+
+　　情况2：如果一个函数中有this，这个函数有被上一级的对象所调用，那么this指向的就是上一级的对象。
+
+　　情况3：如果一个函数中有this，这个函数被多个对象包裹，尽管这个函数是被最外层的对象所调用，this指向的也只是它上一级的对象，例子3可以证明，如果不相信，那么接下来我们继续看几个例子。*/
+
+        /*--------------------案例五--------------------*/
+        var obj4 = {
+            a: 'how',
+            b: {
+                fn: function () {
+                    console.log('案例五: ' + a);
+                }
+            }
+        }
+        // obj4.b.fn() //a is not defined
+        /*这个this指向的也是对象b，因为this只会指向它的上一级对象，不管这个对象中有没有this要的东西*/
+
+
+        /*--------------------案例六--------------------*/
+        var obj5 = {
+            a: 'how',
+            b: {
+                fn: function () {
+                    console.log('案例六: ' + this.a);
+                    console.log('案例六this: ' + this);
+                }
+            }
+        }
+        var j = obj5.b.fn
+        j()  //案例六: undefined 
+        // 案例六this: [object Window]
+
+        /*这里this指向的是window，是不是有些蒙了？其实是因为你没有理解一句话，这句话同样至关重要。
+    　　 this永远指向的是最后调用它的对象，也就是看它执行的时候是谁调用的，
+        例子4中虽然函数fn是被对象b所引用，但是在将fn赋值给变量j的时候并没有执行所以最终指向的是window，
+        这和例子3是不一样的，例子3是直接执行了fn。*/
+
+
+        /*构造函数中的this*/
+        function Fn() {
+            this.user = 'jane'
+        }
+        var a = new Fn()
+        console.log(a.user);
+
+
+
+        /*更新一个小问题当this碰到return时*/
+        function fn() {
+            this.user = 'jane';
+            return {};
+        }
+        var a = new fn;
+        console.log(a.user); //undefined
+
+    </script>
+</body>
+
+</html>
