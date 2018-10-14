@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .carousel {
+            width: 560px;
+            height: 300px;
+            margin: 100px auto;
+            border: 1px solid gray;
+            position: relative;
+            /* overflow: hidden; */
+        }
+
+        .carousel .movement {
+            width: 5000px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .carousel .movement ul {
+            list-style: none;
+        }
+
+        .carousel .movement ul li {
+            width: 560px;
+            height: 300px;
+            float: left;
+            overflow: hidden;
+        }
+
+        .carousel .btns .common {
+            height: 40px;
+            width: 40px;
+            position: absolute;
+            top: 50%;
+            margin-top: -20px;
+            background-color: beige;
+            font-size: 20px;
+            line-height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            cursor: pointer;
+            z-index: 999;
+        }
+
+        .carousel .btns .btnLeft {
+            left: 10px;
+        }
+
+        .carousel .btns .btnRight {
+            right: 10px;
+        }
+
+        .carousel .circles {
+            width: 100px;
+            height: 10px;
+            position: absolute;
+            ;
+            bottom: 10px;
+            ;
+            left: 50%;
+            margin-left: -50px;
+        }
+
+        .carousel .circles ol {
+            list-style: none;
+        }
+
+        .carousel .circles ol li {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            float: left;
+            margin-right: 10px;
+            background-color: seashell;
+            cursor: pointer;
+
+        }
+
+        .carousel .circles ol li.current {
+            background-color: darkslategray;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="carousel1" id='carousel1'>
+    </div>
+    <script src="jquery.js"></script>
+    <script>
+        /*IIFE (Immediately Invoked Function Expression)*/
+        //原因:封闭变量,尽可能减少全局变量. 
+        (function () {
+            let carousel, init;
+            window.createCarousel = function (idName) {
+                document.querySelector(idName).innerHTML = carrouselTpl
+                init()
+            }
+
+            /*把html存放到js中,组件化开发 */
+            let carrouselTpl = `
+                <div class="carousel" id='carousel'>
+                    <div class="btns">
+                        <span class="btnLeft common" id='btnLeft'>&lt;</span>
+                        <span class="btnRight common" id='btnRight'>&gt;</span>
+                    </div>
+                    <div class="movement" id='movement'>
+                        <ul>
+                            <li>
+                                <a href="">
+                                    <img src="jsimage/animals/0.jpg" alt="">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <img src="jsimage/animals/1.jpg" alt="">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <img src="jsimage/animals/2.jpg" alt="">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <img src="jsimage/animals/3.jpg" alt="">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <img src="jsimage/animals/4.jpg" alt="">
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="circles" id='circles'>
+                        <ol>
+                            <li class="current"></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ol>
+                    </div>
+                </div>
+`
+            init = function () {
+                // $('.movement').append($('.movement ul li:first').clone());
+                $('.movement ul li:first').clone().appendTo('.movement ul');
+                var $movement = $('.movement');
+                var $circlesLis = $('.circles ol li');
+                var idx = 0;
+
+
+                $('.btnLeft').click(function () {
+                    if ($movement.is(':animated')) return;
+                    idx--;
+                    if (idx < 0) {
+                        idx = 4;
+                        $movement.css('left', 5 * -560);
+                    }
+                    $movement.animate({ 'left': idx * -560 }, 500);
+                    changeCircles();
+                })
+                $('.btnRight').click(function () {
+                    if ($movement.is(':animated')) return;
+                    idx++;
+
+                    $movement.animate({ 'left': idx * -560 }, 500, function () {
+                        if (idx > 4) {
+                            idx = 0;
+                            $movement.css('left', 0)
+
+                        }
+                        changeCircles();
+                    })
+
+                })
+
+                //圆点监听
+                $circlesLis.click(function () {
+                    idx = $(this).index();
+
+                    console.log('我是小圆点的click事件监听', $(this).index());
+                    $movement.css('left', -560 * idx)
+                    changeCircles();
+                })
+
+                //更改小圆点
+                function changeCircles() {
+                    $circlesLis.removeClass('current');
+                    $circlesLis.eq(idx).addClass('current');
+                }
+
+            }
+
+        })()     
+    </script>
+    <script>
+        createCarousel('#carousel1')
+    </script>
+</body>
+
+</html>
