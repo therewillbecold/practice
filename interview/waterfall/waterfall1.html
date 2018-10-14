@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #999;
+        }
+
+        .waterfall {
+            width: 780px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .grid {
+            position: absolute;
+            border-radius: 8px;
+            width: 230px;
+            box-sizing: border-box;
+            background-color: white;
+        }
+
+        .grid img {
+            width: 230px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="waterfall">
+        <div class="grid">
+            <img src="images/0.png" alt="" />
+            <p>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
+        </div>
+        <div class="grid">
+            <img src="images/1.png" alt="" />
+            <p>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
+        </div>
+        <div class="grid">
+            <img src="images/2.png" alt="" />
+            <p>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
+        </div>
+        <div class="grid">
+            <img src="images/3.png" alt="" />
+            <p>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
+        </div>
+        <div class="grid">
+            <img src="images/4.png" alt="" />
+            <p>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
+        </div>
+        <div class="grid">
+            <img src="images/5.png" alt="" />
+            <p>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
+        </div>
+        <div class="grid">
+            <img src="images/6.png" alt="" />
+            <p>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
+        </div>
+        <div class="grid">
+            <img src="images/7.png" alt="" />
+            <p>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
+        </div>
+        <div class="grid">
+            <img src="images/8.png" alt="" />
+            <p>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
+        </div>
+        <div class="grid">
+            <img src="images/9.png" alt="" />
+            <p>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
+        </div>
+        <div class="grid">
+            <img src="images/10.png" alt="" />
+            <p>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
+        </div>
+        <div class="grid">
+            <img src="images/11.png" alt="" />
+            <p>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
+        </div>
+        <div class="grid">
+            <img src="images/12.png" alt="" />
+            <p>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
+        </div>
+    </div>
+    </div>
+    <script src="./js/jquery-1.12.3.min.js"></script>
+    <script>
+        window.onload = function () {
+            $grid = $('.grid');
+            $grid.each(function () {
+                var sum = 0;
+                for (var i = $(this).index() - 3; i >= 0; i -= 3) {
+                    sum += $grid.eq(i).outerHeight() + 20;
+                }
+                $(this).css({
+                    'top': sum,
+                    'left': ($(this).index() % 3) * 270
+                })
+            })
+
+        }
+    </script>
+</body>
+
+</html>

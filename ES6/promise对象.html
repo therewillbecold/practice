@@ -10,6 +10,24 @@
 
 <body>
     <script>
+        new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                var _num = Math.random()
+                if (_num < 0.5) {
+                    resolve(_num)
+                } else {
+                    reject(_num)
+                }
+            }, 1000)
+        })
+            .then(res => { console.log('解决1'); }, err => { console.log('Error1'); })
+            .then(res => { console.log('解决2'); }, err => { console.log('Error2'); })
+            .then(res => { console.log('解决3'); }, err => { console.log('Error3'); })
+            .then(res => { console.log('解决4'); }, err => { console.log('Error4'); })
+            .then(function(res){}, err => { console.log('Error4'); })
+
+
+
         /* ES6规定，Promise对象是一个构造函数，用来生成Promise实例*/
         new Promise(function (resolve, reject) {
             setTimeout(function () {
@@ -77,6 +95,150 @@
             .then(res => { console.log(555, res); })
             .then(res => console.log(666, res))
             .catch(err => console.log(err)) // 捕获前面可能出现的错误
+
+
+        var dajiangyouDone = false
+        var qieDone = false
+
+        function xi(callback) {
+            setTimeout(function () {
+                console.log('洗菜')
+                callback && callback()
+            }, 1000)
+        }
+
+        function qie(callback) {
+            setTimeout(function () {
+                console.log('切菜')
+                qieDone = true
+                callback && callback()
+
+            }, 1000)
+        }
+
+        function chao(callback) {
+            if (dajiangyouDone && qieDone) {
+                setTimeout(function () {
+                    console.log('炒菜')
+                    callback && callback()
+                }, 1000)
+            }
+        }
+
+        function dajiangyou(callback) {
+            setTimeout(function () {
+                console.log('打酱油')
+                dajiangyouDone = true
+                callback && callback()
+
+            }, 1000)
+        }
+
+        // callback处理多个分支
+        xi(function () {
+            qie(function () {
+                chao()
+            })
+        })
+
+        dajiangyou(chao)
+
+
+
+
+        function promise_xi() {
+            return new Promise(function (resolve, reject) {
+                setTimeout(() => {
+                    console.log('洗菜');
+                    resolve()
+                }, 1000)
+            })
+        }
+        function promise_qie() {
+            return new Promise(function (resolve, reject) {
+                setTimeout(() => {
+                    console.log('切菜');
+                    resolve()
+                }, 1000)
+            })
+        }
+        function promise_chao() {
+            return new Promise(function (resolve, reject) {
+                setTimeout(() => {
+                    console.log('炒菜');
+                    reject()
+                }, 1000)
+            })
+        }
+
+        promise_xi().then((res) => {
+            console.log('洗完')
+            promise_qie().then((res) => {
+                console.log('切完');
+                promise_chao().then((res) => {
+                    console.log('炒完');
+                }, (err) => {
+                    console.log('未炒完');
+                }
+                )
+            }
+            )
+        })
+
+
+
+
+        function xi_qie() {
+            return new Promise(resolve => {
+                promise_xi().then((res) => {
+                    console.log('洗完')
+                    promise_qie().then((res) => {
+                        console.log('切完');
+                        resolve()
+
+                    }
+                    )
+                })
+            })
+        }
+
+        function promiseDajiangyou() {
+            return new Promise(function (resolve, reject) {
+                setTimeout(() => {
+                    console.log('打酱油');
+                    resolve()
+                }, 1000)
+            })
+        }
+
+        // 传个数组, 数组里可以放多个promise对象, 这些promise都完成之后触发.then中的resolveCallback
+        Promise.all([promiseDajiangyou(), xi_qie()])
+            .then(res => {
+                promise_chao().then((res) => {
+                    console.log('炒完');
+                })
+            })
+
+        // 有一个promise完成即触发then中的方法
+        Promise.race([promiseDajiangyou(), xi_qie()])
+            .then(res => {
+                promise_chao().then((res) => {
+                    console.log('炒完');
+                })
+            })
+
+        // promise链式调用
+        promise_xi()
+            .then(res => promise_qie())
+            .then(res => promise_chao())
+            .catch(err => { console.log(err) })
+
+
+
+
+
+
+
     </script>
 </body>
 

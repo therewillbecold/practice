@@ -26,20 +26,20 @@
             }
         }
         
-        function myNew (fn, ...args) {
-            // 建立一个空对象
-            var obj = {}
-            // 该对象继承构造函数的原型
-            obj = Object.create(fn.prototype)
-            // 执行构造函数, 并把该对象绑定为this, 进行构造函数的继承
-            var res = fn.apply(obj, args)
-            // 判断构造函数返回值的类型, 如果没有返回值或返回值是值类型, 则返回第二步创建的这个空对象, 否则返回原构造函数的返回结果.
-            if (typeof res == 'undefined' || typeof res !== 'object') {
-                return obj
-            } else {
-                return res
-            }
+    function myNew (fn, ...args) {
+        // 建立一个空对象
+        var obj = {}
+        // 该对象继承构造函数的原型
+        obj = Object.create(fn.prototype)
+        // 执行构造函数, 并把该对象绑定为this, 进行构造函数的继承
+        var res = fn.apply(obj, args)
+        // 判断构造函数返回值的类型, 如果没有返回值或返回值是值类型, 则返回第二步创建的这个空对象, 否则返回原构造函数的返回结果.
+        if (typeof res == 'undefined' || typeof res !== 'object') {
+            return obj
+        } else {
+            return res
         }
+    }
         
         // var apple = new Fruit()
         var apple = myNew(Fruit, '灵宝', '不甜')

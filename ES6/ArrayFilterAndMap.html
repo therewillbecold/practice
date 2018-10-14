@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [5, 2, 3, -5];
+
+        var filtered = arr.filter(n => n > 2)
+
+        /*turn array items to string */
+        var items = filtered.map(n => `<li>${n}</li>`)
+        var html = `<ul>` + items.join('') + `</ul>`
+        document.body.innerHTML = html
+
+        /*turn array items to object */
+        var items = filtered.map(n => {
+            var obj = { value: n }
+            return obj
+        })
+
+        var items = filtered.map(n => { value: n })  //wrong!  (2) [undefined, undefined]
+        var items = filtered.map(n => ({ value: n }))  //correct!  (2) [5, 3]
+
+
+        /*chaining*/
+        var item = arr.filter(n => n > 2).map(n => ({ value: n }))
+
+    </script>
+</body>
+
+</html>

@@ -9,7 +9,8 @@ import ReactDOM from 'react-dom';
 // import './base/form1'
 // import './antd/firstAnt'
 // import './antd/secAnt'
-import './base/canvas'
+// import './base/canvas'
+import './base/props'
 
 import App from './App';
 

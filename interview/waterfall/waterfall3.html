@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #999;
+        }
+
+        #waterfall {
+            width: 780px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .grid {
+            position: absolute;
+            width: 230px;
+            border-radius: 8px;
+            box-sizing: border-box;
+            background-color: white;
+        }
+        .grid .title{
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 30px;
+        }
+        .grid .content{
+            font-size: 14px;
+            line-height: 150%;
+        }
+        .grid .creater{
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 200%;
+        }
+        .grid img {
+            width: 230px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="waterfall">
+    </div>
+    <div class="loading">
+        正在加载...
+    </div>
+
+    <script type="text/template" id="grid_tpl">
+     <div class="grid">
+            <img src="<%= imgurl %>"/>
+            <p class="title"><%= title %></p>
+            <p class="content"><%= content %></p>
+            <p class="creater"><%= author %></p>
+        </div>
+    </script>
+    <script src="./js/jquery-1.12.3.min.js"></script>
+    <script src="./js/lodash.js"></script>
+    <script>
+
+        //用jQuery中的.html()选中元素,得到内容模板字符串
+        let tplStr = $('#grid_tpl').html();
+        //生成编译函数
+        let compile = _.template(tplStr);
+
+        let $waterfall = $("#waterfall");
+        let $loading = $(".loading");
+
+        //三列瀑布流，每列的总高度
+        var colHeight = [0, 0, 0];
+
+        //信号量
+        var page = 1;
+        getJSONandRender(page);
+        function getJSONandRender(page) {
+            $loading.show();
+
+            $.get(`/waterfall/json/json${page}.txt`, function (data) {
+                var dataObj = JSON.parse(data)
+                if (dataObj.news.length === 0) {
+                    $loading.show().html('没有更多了');
+                    return
+                }
+                _.each(dataObj.news, function (item) {
+                    //竞速规则，谁先加载完毕，我先处理谁
+                    //这是系统内置构造函数
+                    var img = new Image()
+                    img.src = item.imgurl
+                    //我们现在给image转为jQuery对象，然后绑定事件
+                    $(img).load(function () {
+                        //此时这张图片加载完毕了，先处理这个人
+                        var domStr = compile(item)
+                        var $grid = $(domStr)
+                        $waterfall.append($grid)
+                        //根据瀑布流算法，设置它的left、top
+                        minValue = _.min(colHeight);
+                        minIndex = _.indexOf(colHeight, minValue);
+                        $grid.css({
+                            "top": minValue,
+                            "left": minIndex * 270
+                        });
+                        //改变总列高数组的值
+                        colHeight[minIndex] += $grid.outerHeight() + 20;
+
+                        //让大盒子根据最高的列设置高度
+                        $waterfall.css("height", _.max(colHeight));
+
+                        //隐藏loading文本
+                        $loading.hide();
+                    })
+                })
+                lock = true;
+            })
+        }
+
+        var lock = true;
+        //监听滚动
+        $(window).scroll(function () {
+            if (!lock) return;
+            var rate = $(window).scrollTop() / ($(document).height() - $(window).height());
+
+            if (rate >= 0.7) {
+                page++;
+                getJSONandRender(page);
+                lock = false;
+            }
+        })
+    </script>
+</body>
+
+</html>

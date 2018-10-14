@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*String primitive*/
+        var msg = 'how are you'
+        typeof msg
+        "string"
+        /*String object*/
+        var another = new String('how are you');
+        typeof another
+        "object"
+
+        another.length //11
+        another[0] //h
+        another.includes('how') //true
+        another.indexOf('is') // -1
+        another.startsWith('how a') //true
+        another.endsWith('ou') // true
+        another.replace('how', 'who') // "who are you"
+        another.toUpperCase() //"HOW ARE YOU"
+        another.split('') // (11) ["h", "o", "w", " ", "a", "r", "e", " ", "y", "o", "u"]
+        another.split(' ') // (3) ["how", "are", "you"]
+
+        
+        var oneMore = '   how are you    '
+        oneMore.trim() // "how are you"
+        oneMore.trimLeft() // "how are you    "
+
+    </script>
+</body>
+
+</html>

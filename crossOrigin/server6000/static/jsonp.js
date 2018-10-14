@@ -30,12 +30,12 @@ function MyJsonP(url, params, callback) {
 }
 
 
-// function myJasonp(url, params, callback) {
-//     params.callbackName = params.callbackName || 'jsonp'
-//     window[params.callbackName] = function (data) {
-//         callback(data)
-//     }
-//     const ele = document.createElement('script')
-//     ele.setAttribute('src', url)
-//     document.body.appendChild(ele)
-// }
+function myJasonp(url, params, callback) {
+    params.callbackName = params.callbackName || 'jsonp'
+    window[params.callbackName] = function (data) {
+        callback(data)
+    }
+    const ele = document.createElement('script')
+    ele.setAttribute('src', url)
+    document.body.appendChild(ele)
+}

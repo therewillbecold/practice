@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=750px, initial-scale=0.448 user-scable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    html,body{
+        width: 100%;
+        font-size: 100px;
+    }
+    .box1{
+        width: 3.75rem;
+       
+        border: 5px solid #000;
+    }
+    .icons{
+        width: 100%;
+        height: 0.6rem;
+        background: #efefef;
+    }
+    .icon{
+        /* width: 20%; */
+        width: 0.75rem;
+        height: 100%;
+        border: 1px solid #000;
+        float: left;
+    }
+    .banner{
+        width: 100%;
+        height: 2.11rem;
+    }
+    .banner img{
+        width: 100%;
+    }
+    .nav{
+        display: flex;
+        background: #efefef;
+        width: 100%;
+        height: 0.7rem;
+    }
+    .nav li{
+        list-style: none;
+        flex: 1 1 auto;
+        position: relative;
+    }
+    .nav li span{
+        background: url(i_nav3.png);
+        width: 0.45rem;
+        height: 0.45rem;
+        display: inline-block;
+        background-size: 175px 84px;
+        background-position: 2px 2px;
+        overflow: hidden;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-65%) translateY(-54%);
+    }
+    .box750{
+        width: 750px;
+        height: 200px;
+        border: 5px solid rgb(149, 28, 28);
+    }
+    </style>
+</head>
+<body>
+    <div class="box750">750</div>
+    <div class="box1">1</div>
+    <div class="icons">
+        <div class="icon"></div>
+        <div class="icon"></div>
+        <div class="icon"></div>
+        <div class="icon"></div>
+        <div class="icon"></div>
+    </div>
+    <div class="banner">
+        <img src="750X422.jpeg" alt="">
+    </div>
+    <ul class="nav">
+        <li><span></span></li>
+        <li><span></span></li>
+        <li><span></span></li>
+        <li><span></span></li>
+    </ul>
+</body>
+</html>

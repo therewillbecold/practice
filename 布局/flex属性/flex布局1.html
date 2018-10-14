@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box1{
+            display: flex;
+            width: 500px;
+            height: 400px;
+            background-color: yellowgreen;
+            align-items: center;
+            justify-content: center;
+            /* flex-wrap 控制items是否折叠*/
+            flex-wrap: wrap; 
+            flex-direction: row;
+        }
+
+        .box1 div{
+            width: 50px;
+            height: 150px;
+            background-color: aqua;
+            border: 5px solid #efefef;
+            /* flex-basis: 100px;
+            flex-grow: 1.0;
+            flex-shrink: 1.0; 值为0时表示不缩放 */
+            /*flex为复合属性, 为这3个的组合 flex-grow | felx-shrink | flex-basis */
+            flex: 1.0 1.0 80px; 
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="box1">
+        <div class="box2">1</div>
+        <div class="box2">2</div>
+        <div class="box2">3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+        <div>7</div>
+        <div>8</div>
+    </div>
+</body>
+</html>

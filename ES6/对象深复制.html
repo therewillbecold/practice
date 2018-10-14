@@ -49,7 +49,7 @@
             return result;
         }
 
-        // 简易版
+        // 简易版  在函数内部调当前用这个函数叫做递归
         function deepClone2(obj) {
             if (!obj || typeof obj !== 'object') {
                 return obj;
@@ -61,7 +61,14 @@
             return _obj
         }
 
-
+        // 精简版 
+        let a = {
+            age: 1,
+            jobs: {
+                first: 'FE'
+            }
+        }
+        let b = JSON.parse(JSON.stringify(a))
 
     </script>
 </body>

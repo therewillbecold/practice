@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/lodash.js"></script>
+    <style>
+        li {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<h1>there will be flowers</h1>
+
+<ul id="flowers"></ul>
+
+<body>
+    <!-- <script type="text/template">
+        <% for(var i = 0 ; i < flowers.length;i++){ %>
+            <li>
+            <div>
+                <span>花类: </span>
+                <span><%= flowers[i].type %></span>
+            </div>
+            <div>
+                <span>颜色: </span>
+                <% for(var j = 0 ; j < flowers[i].color.length ; j++){ %>
+                    <span><%= flowers[i].color[j] %> &emsp;</span>
+               <% } %>
+            </div>
+            <div>
+                <span>味道: </span>
+                <span><%= flowers[i].smell %></span>
+            </div>
+            <div>
+                <span>价格: </span>
+                <span><%= flowers[i].price %></span>
+            </div>
+        </li>
+        <% } %>
+    </script> -->
+
+    <script>
+        // 完整的模板引擎
+
+        // 1. 获取模板字符串
+        var tplStr =
+            '<% for(var i = 0 ; i < flowers.length;i++){ %>' +
+            '<li>' +
+            '<div>' +
+            '<span>花类: </span>' +
+            '<span><%= flowers[i].type %></span>' +
+            '</div>' +
+            '<div>' +
+            '<span>颜色: </span>' +
+            '<% for(var j = 0 ; j < flowers[i].color.length ; j++){ %>' +
+            '<span><%= flowers[i].color[j] %> &emsp;</span>' +
+            '<% } %>' +
+            '</div>' +
+            '<div>' +
+            '<span>味道: </span>' +
+            '<span><%= flowers[i].smell %></span>' +
+            '</div>' +
+            '<div>' +
+            '<span>价格: </span>' +
+            '<span><%= flowers[i].price %></span>' +
+            '</div>' +
+            '</li>' +
+            '<% } %>';
+        // 2. 生成编译函数
+        var compile = _.template(tplStr);
+        // 3. 传入数据, 生成htmlString
+        var htmlStr = compile({
+            flowers: [
+                {
+                    type: 'Roce',
+                    color: ['red', 'blue', 'black'],
+                    smell: 'mild',
+                    price: '9'
+                }, {
+                    type: 'Lily',
+                    color: ['white'],
+                    smell: 'medium',
+                    price: 9
+                }, {
+                    type: 'Daffodil',
+                    color: ['white', 'yellow'],
+                    smell: 'strong',
+                    price: 9
+                }, {
+                    type: 'Lavender',
+                    color: ['purple'],
+                    smell: 'strong',
+                    price: 9
+                }, {
+                    type: 'Chrysanthemum',
+                    color: ['white', 'yellow', 'purple', 'pink'],
+                    smell: 'mild',
+                    price: 9
+                }
+            ]
+        })
+        // 4. 把html字符串插入到页面上
+        document.querySelector('#flowers').innerHTML = htmlStr;
+    </script>
+</body>
+
+</html>

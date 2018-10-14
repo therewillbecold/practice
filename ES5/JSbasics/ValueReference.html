@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        Value : Number String Boolean Symbol Undefined Null
+        Primitives are copied by their value
+        */
+        let number = 10;
+        function plus(number) {
+            number++
+        }
+        plus(number)
+        console.log(number);  //10
+
+        /*
+        Reference : Object Function Array 
+        Objects are copied by their reference 
+        */
+        let obj = { value: 10 };
+        function plus(obj) {
+            obj.value++
+        }
+        plus(obj)
+        console.log(obj); //11
+
+        for (var code = 0; code > 0; code++) {
+            code
+        }
+    </script>
+</body>
+
+</html>

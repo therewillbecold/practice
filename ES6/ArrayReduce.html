@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [5, 2, 3, -5]
+
+        var sum = 0
+        for (let n of arr) {
+            sum += n
+        }
+        console.log(sum);
+
+
+
+        var arr = [5, 2, 3, -5]
+        // a = 0 , c = 5 => a = 5
+        // a = 5 , c = 2 => a = 7 
+        // a = 7 , c = 3 => a = 10 
+        // a = 10 , c = -5 => a = 5  
+        var sum = arr.reduce((accumulator, currentValue) => {
+            return accumulator + currentValue
+        }, 0)
+
+        // a = 5 , c = 2 => a = 7 
+        // a = 7 , c = 3 => a = 10 
+        // a = 10 , c = -5 => a = 5  
+        var sum = arr.reduce(
+            (accumulator, currentValue) => accumulator + currentValue
+        )
+    </script>
+</body>
+
+</html>

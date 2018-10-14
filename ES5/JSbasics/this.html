@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* method -> Object */
+        var music = {
+            title: 'kiss the rain',
+            play() {
+                console.log('this is ', this);
+            }
+        }
+        music.play()
+
+
+        /*function -> global (Window)*/
+        function play() {
+            console.log('this is ', this);
+        }
+        play()
+
+        function Music(title) {
+            this.title = title;
+            console.log('this is ', this);
+        }
+        var m = new Music('kiss the rain') //{}
+
+
+        var music = {
+            title: 'kiss the rain',
+            tags: ['great', 'ok', 'horrible'],
+            showTags() {
+                this.tags.forEach(function (tag) {
+                    console.log(tag); 
+                    //'great', 'ok', 'horrible'
+                    console.log(this.title, tag); 
+                    //it's a calllback function in forEach,and this function does not belong in music object
+                },this) //solution for this 
+            }
+        }
+    </script>
+</body>
+
+</html>

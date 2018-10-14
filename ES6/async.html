@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .red {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            position: absolute;
+            top: 100px;
+            left: 0;
+            transition: all 1s ease 0s;
+        }
+
+        .blue {
+            width: 50px;
+            height: 50px;
+            background-color: teal;
+            position: absolute;
+            top: 200px;
+            left: 0;
+            transition: all 1s ease 0s;
+        }
+
+        .green {
+            width: 50px;
+            height: 50px;
+            background-color: green;
+            position: absolute;
+            top: 300px;
+            left: 0;
+            transition: all 1s ease 0s;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="btn">按钮</button>
+    <div class="red"></div>
+    <div class="blue"></div>
+    <div class="green"></div>
+    <script>
+        var btn = document.querySelector('.btn');
+        var red = document.querySelector('.red');
+        var blue = document.querySelector('.blue');
+        var green = document.querySelector('.green');
+
+        btn.addEventListener('click', function () {
+            promiseAnimation()
+            // asyncAnimation()
+        })
+
+        var promise_step1 = () => {
+            return new Promise(function (resolve) {
+                function cb() {
+                    resolve()
+                    red.removeEventListener('transitionend', cb)
+                }
+                red.addEventListener('transitionend', cb)
+                red.style.left = '600px'
+            })
+        }
+
+        var promise_step2_1 = () => {
+            return new Promise(function (resolve, reject) {
+                red.addEventListener('transitionend', function () {
+                    if (event.propertyName == 'left') {
+                        reject()
+                    }
+                })
+                red.style.transtion = 'left 1s linear 0s'
+                red.style.left = '300px'
+                red.style.top = '300px'
+            })
+        }
+        var promise_step2_2 = () => {
+            return new Promise(function (resolve) {
+                red.addEventListener('transitionend', function (event) {
+                    console.log(event);
+                    if (event.propertyName == 'left') {
+                        resolve()
+                    }
+                })
+                red.style.transtion = 'all 1s linear 0s'
+                red.style.left = 0
+                red.style.top = '600px'
+            })
+        }
+        var promise_step3 = () => {
+            return new Promise(function (resolve) {
+                red.addEventListener('transitionend', function () {
+                    if (event.propertyName == 'left') {
+                        resolve()
+                    }
+                })
+                red.style.left = '600px'
+                red.style.top = '600px'
+            })
+        }
+
+        var promise_blue = () => {
+            return new Promise(function (resolve) {
+                blue.addEventListener('transitionend', function () {
+                    resolve()
+                })
+                blue.style.left = '600px'
+                blue.style.transtion = 'all 1s linear 0s'
+            })
+        }
+        var promise_green = () => {
+            return new Promise(function (resolve) {
+                green.addEventListener('transitionend', function () {
+                    resolve()
+                })
+                green.style.left = '600px'
+                green.style.transtion = 'all 1s linear 0s'
+            })
+        }
+
+        var promiseAnimation = () => {
+            promise_step1()
+                // .then(rex => { promise_step2_1() })
+                .then(res => {
+                    return Promise.all([promise_step2_1(), promise_blue()])
+                })
+                .then(res => { return promise_step2_2() })
+                .then(res => { return promise_step3() })
+                .then(res => { return promise_green() })
+                .catch(err => { console.log('.then捕捉到的错误: ' + err); })
+        }
+        
+
+
+        async function asyncAnimation() {
+            try {
+                await promise_step1()
+                await Promise.all([promise_step2_1(), promise_blue()])
+                await promise_step2_2()
+                await promise_step3()
+                await promise_green()
+            } catch (err) {
+                console.log('async捕捉到的错误: ' + err);
+            }
+        }
+    </script>
+</body>
+
+</html>

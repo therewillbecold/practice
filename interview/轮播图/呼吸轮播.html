@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .carousel {
+            width: 560px;
+            height: 300px;
+            border: 1px solid #000;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        .carousel ul {
+            list-style: none;
+        }
+
+        .carousel ul li {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+
+        .carousel ul li:nth-child(1) {
+            display: block;
+        }
+
+        .carousel .btnsCommon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50px;
+            position: absolute;
+            top: 50%;
+            margin-top: -20px;
+            background-color: rgb(243, 217, 217);
+            z-index: 1;
+            text-align: center;
+            font-size: 30px;
+            line-height: 40px;
+            color: rgb(252, 246, 246);
+            text-shadow: 1px 1px 1px black;
+            cursor: pointer;
+        }
+
+        .carousel .lBtn {
+            left: 10px;
+        }
+
+        .carousel .rBtn {
+            right: 10px;
+        }
+
+        .carousel .circles {
+            width: 100px;
+            height: 10px;
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            margin-left: -50px;
+        }
+
+        .carousel .circles ol {
+            list-style: none;
+        }
+
+        .carousel .circles ol li {
+            width: 10px;
+            height: 10px;
+            margin-right: 10px;
+            background-color: black;
+            border-radius: 50px;
+            float: left;
+            cursor: pointer;
+        }
+
+        .carousel .circles ol li.cur {
+            background-color: white;
+            box-shadow: 1px 1px 1px black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="carousel">
+        <div class="btnsCommon lBtn">&lt;</div>
+        <div class="btnsCommon rBtn">&gt;</div>
+        <ul>
+            <li>
+                <a href="">
+                    <img src="jsimage/animals/0.jpg" alt="">
+                </a>
+            </li>
+
+            <li>
+                <a href="">
+                    <img src="jsimage/animals/1.jpg" alt="">
+                </a>
+            </li>
+
+            <li>
+                <a href="">
+                    <img src="jsimage/animals/2.jpg" alt="">
+                </a>
+            </li>
+
+            <li>
+                <a href="">
+                    <img src="jsimage/animals/3.jpg" alt="">
+                </a>
+            </li>
+
+            <li>
+                <a href="">
+                    <img src="jsimage/animals/4.jpg" alt="">
+                </a>
+            </li>
+        </ul>
+        <div class="circles">
+            <ol>
+                <li class="cur"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ol>
+        </div>
+    </div>
+
+    </div>
+    <script src="jquery.js"></script>
+    <script>
+        var $imgLis = $('.carousel ul li')
+        var $lBtn = $('.carousel .lBtn');
+        var $rBtn = $('.carousel .rBtn');
+        var $circles = $('.carousel .circles ol li');
+
+        var idx = 0;
+        function lBtnClickhandler() {
+            if ($imgLis.is(':animated')) return
+            $imgLis.eq(idx).fadeOut(1500);
+            idx--;
+            if (idx < 0) {
+                idx = $imgLis.length - 1;
+            }
+            $imgLis.eq(idx).fadeIn(1500);
+            changeCircles(idx);
+        }
+        function lBtnClickhandler() {
+            if ($imgLis.is(':animated')) return;
+            //点击按钮后当前张先淡出
+            $imgLis.eq(idx).fadeOut(1500);
+            //判断条件,条件满足后下张淡入
+            idx++;
+            if (idx > $imgLis.length - 1) {
+                idx = 0;
+            }
+            //下张淡入
+            $imgLis.eq(idx).fadeIn(1500);
+            changeCircles(idx);
+        }
+
+        function circlesClickhandler() {
+            //防止狂点
+            if ($imgLis.is(':animated')) return;
+            //保存当前小圆点的值
+            var current = idx;
+            //获得点击后小圆点的值
+            var index = $(this).index();
+            idx = index;
+            //当前照片淡出
+            $imgLis.eq(current).fadeOut(1500);
+            //点击值得照片淡入
+            $imgLis.eq(idx).fadeIn(1500);
+            changeCircles(idx);
+        }
+
+
+        function changeCircles(n) {
+            //去掉小圆点的样式
+            $circles.removeClass('cur');
+            //加上当前小圆点的样式
+            $circles.eq(n).addClass('cur');
+
+        }
+
+        $lBtn.click(lBtnClickhandler);
+        $rBtn.click(lBtnClickhandler);
+        $circles.click(circlesClickhandler);
+
+
+
+    </script>
+
+
+
+    </script>
+</body>
+
+</html>
