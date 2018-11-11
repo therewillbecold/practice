@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            margin: 15px;
+        }
+
+        input:focus {
+            animation: change 1s ease 0s infinite alternate;
+        }
+
+        @keyframes change {
+            from {
+                box-shadow: 5px 5px 5px teal;
+            }
+            to {
+                box-shadow: 5px 5px 5px rgb(3, 53, 53);
+            }
+        }
+
+        input:checked+label {
+            color: darkred;
+            font-weight: bolder;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="create/user" method="post">
+        <div>
+            <label> Name:
+                <input type="text" autofocus name="name">
+            </label>
+        </div>
+
+        <div>
+            <label>
+                <span>Male</span>
+                <input type="radio" name="gender">
+            </label>
+            <label>
+                <span>Female</span>
+                <input type="radio" name="gender">
+            </label>
+        </div>
+
+        <div>
+            <label> Age:
+                <input type="number" name="age" min="0" max="150">
+            </label>
+        </div>
+
+        <div>
+            <span>Ntionality:</span>
+            <label>
+                <span>Chinese</span>
+                <input type="radio" name="nationality">
+            </label>
+            <label>
+                <span>Foreign</span>
+                <input type="radio" name="nationality">
+            </label>
+        </div>
+
+        <div>
+            <label>Hometown:
+                <input type="text" name="hometown" id="Hometown" list="tips">
+                <datalist id="tips">
+                    <option value="California"> California</option>
+                    <option value="New York">New York</option>
+                    <option value="Florida">Florida</option>
+                    <option value="Texas">Texas</option>
+                </datalist>
+            </label>
+        </div>
+
+        <p>Year:
+            <!-- 下拉列表 -->
+            <select>
+                <option>1997</option>
+                <option>1998</option>
+                <option>1999</option>
+                <option>2000</option>
+                <option>2001</option>
+                <option>2002</option>
+            </select>
+            <p>
+                <div>
+                    <label>
+                        <input type="checkbox" name="hobby">Coding</label>
+                    <label>
+                        <input type="checkbox" name="hobby">Dancing</label>
+                    <label>
+                        <input type="checkbox" name="hobby">Exercise</label>
+                    <label>
+                        <input type="checkbox" name="hobby">thinking</label>
+                </div>
+
+                <div>
+                    <label> Tel:
+                        <input type="tel" name="telephone">
+                    </label>
+                </div>
+                <div>
+                    <label> Email:
+                        <input type="email" name="mail">
+                    </label>
+                </div>
+                <div>
+                    <label> Link:
+                        <input type="url" name="link">
+                    </label>
+                </div>
+
+
+                <div>
+                    <label>
+                        <input type="checkbox" name="protocol"> I agree to the Privacy Policy </label>
+                </div>
+
+                <div>
+                    <label>Password:
+                        <input type="password" name="password">
+                    </label>
+                </div>
+
+                <div>
+                    <label>Birthday:
+                        <input type="date"> </label>
+                </div>
+
+                <div>
+                    <label>Shopping:
+                        <input type="text" name="shopping" placeholder="MAC">
+                    </label>
+                </div>
+
+                <div>
+                    <label>Favorite color:
+                        <input type="color" name="password">
+                    </label>
+                </div>
+
+                <div>
+                    <label>Height:
+                        <input type="range" name="height" min="100" max="240"> </label>
+                </div>
+                <div>
+                    <label>
+                        <span>Do you like us ? </span>
+                        <input type="text" placeholder="leave someting here ">
+                    </label>
+                </div>
+                <div>
+                    <input type="Submit">
+                    <input type="button" value="Cancel" disabled>
+                </div>
+
+    </form>
+
+</body>
+
+</html>
