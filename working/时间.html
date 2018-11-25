@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 class="sTimer"></h1>
+    <h1 class="msTimer"></h1>
+    <h1 class="time"></h1>
+    <script>
+        // 秒表
+        let s = 0
+        let sTimer = document.querySelector('.sTimer');
+        setInterval(function () {
+            s++;
+            sTimer.innerHTML = '秒表:' + parseInt(s / 60) + 'm' + (s % 60) + 's';
+        }, 1000);
+
+        // 毫秒表
+        let ms = 0;
+        let msTimer = document.querySelector('.msTimer');
+        setInterval(function () {
+            ms++;
+            msTimer.innerHTML = "毫秒表:" + parseInt(ms / (60 * 60 * 1000)) + 'h' + parseInt(ms / (60 * 1000)) + 'm' + parseInt(ms / 1000) + 's' + (ms % 1000) + 'ms';
+        }, 20);
+
+
+        setInterval(function () {
+            //当前时间
+            let time = new Date()
+            let beijingTime = document.querySelector('.time');
+            // beijingTime.innerHTML = time;
+
+            let t = {
+                "year": time.getFullYear(),
+                "month": time.getMonth(),
+                "day": time.getDate(),
+                "hour": time.getHours(),
+                "minute": time.getMinutes(),
+                "second": time.getSeconds(),
+                "ms": time.getMilliseconds()
+            }
+            beijingTime.innerHTML = t.year + '年' + t.month + '月' + t.day + '日' + t.hour + '时' + t.minute + '分' + t.second + '秒' + t.ms + '毫秒';
+        }, 1);
+
+        // 如何返给后端时间戳 ?
+        let time2 = new Date();
+        // 如何把后端的时间戳改成标准时间 ?
+        let ms1 = time2.getTime(); //得到毫秒数
+        let beijingTime1 = new Date(ms1);
+    </script>
+</body>
+
+</html>
