@@ -1,217 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+      }
 
-        .carousel {
-            width: 560px;
-            height: 300px;
-            margin: 100px auto;
-            border: 1px solid gray;
-            position: relative;
-            /* overflow: hidden; */
-        }
+      .carousel {
+        width: 560px;
+        height: 300px;
+        margin: 100px auto;
+        border: 1px solid gray;
+        position: relative;
+        /* overflow: hidden; */
+      }
 
-        .carousel .movement {
-            width: 5000px;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
+      .carousel .movement {
+        width: 5000px;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
 
-        .carousel .movement ul {
-            list-style: none;
-        }
+      .carousel .movement ul {
+        list-style: none;
+      }
 
-        .carousel .movement ul li {
-            width: 560px;
-            height: 300px;
-            float: left;
-            overflow: hidden;
-        }
+      .carousel .movement ul li {
+        width: 560px;
+        height: 300px;
+        float: left;
+        overflow: hidden;
+      }
 
-        .carousel .btns .common {
-            height: 40px;
-            width: 40px;
-            position: absolute;
-            top: 50%;
-            margin-top: -20px;
-            background-color: beige;
-            font-size: 20px;
-            line-height: 40px;
-            border-radius: 50%;
-            text-align: center;
-            cursor: pointer;
-            z-index: 999;
-        }
+      .carousel .btns .common {
+        height: 40px;
+        width: 40px;
+        position: absolute;
+        top: 50%;
+        margin-top: -20px;
+        background-color: beige;
+        font-size: 20px;
+        line-height: 40px;
+        border-radius: 50%;
+        text-align: center;
+        cursor: pointer;
+        z-index: 999;
+      }
 
-        .carousel .btns .btnLeft {
-            left: 10px;
-        }
+      .carousel .btns .btnLeft {
+        left: 10px;
+      }
 
-        .carousel .btns .btnRight {
-            right: 10px;
-        }
+      .carousel .btns .btnRight {
+        right: 10px;
+      }
 
-        .carousel .circles {
-            width: 100px;
-            height: 10px;
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            margin-left: -50px;
-        }
+      .carousel .circles {
+        width: 100px;
+        height: 10px;
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        margin-left: -50px;
+      }
 
-        .carousel .circles ol {
-            list-style: none;
-        }
+      .carousel .circles ol {
+        list-style: none;
+      }
 
-        .carousel .circles ol li {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            float: left;
-            margin-right: 10px;
-            background-color: seashell;
-            cursor: pointer;
+      .carousel .circles ol li {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        float: left;
+        margin-right: 10px;
+        background-color: seashell;
+        cursor: pointer;
+      }
 
-        }
-
-        .carousel .circles ol li.cur {
-            background-color: darkslategray;
-        }
+      .carousel .circles ol li.cur {
+        background-color: darkslategray;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-    <div class="carousel" id='carousel'>
-        <div class="btns">
-            <span class="btnLeft common" id='btnLeft'>&lt;</span>
-            <span class="btnRight common" id='btnRight'>&gt;</span>
-        </div>
-        <div class="movement" id='movement'>
-            <ul>
-                <li>
-                    <a href="">
-                        <img src="jsimage/animals/0.jpg" alt="">
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="jsimage/animals/1.jpg" alt="">
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="jsimage/animals/2.jpg" alt="">
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="jsimage/animals/3.jpg" alt="">
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="jsimage/animals/4.jpg" alt="">
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="circles" id='circles'>
-            <ol>
-
-            </ol>
-        </div>
+  <body>
+    <div class="carousel" id="carousel">
+      <div class="btns">
+        <span class="btnLeft common" id="btnLeft">&lt;</span>
+        <span class="btnRight common" id="btnRight">&gt;</span>
+      </div>
+      <div class="movement" id="movement">
+        <ul>
+          <li>
+            <a href=""> <img src="jsimage/animals/0.jpg" alt="" /> </a>
+          </li>
+          <li>
+            <a href=""> <img src="jsimage/animals/1.jpg" alt="" /> </a>
+          </li>
+          <li>
+            <a href=""> <img src="jsimage/animals/2.jpg" alt="" /> </a>
+          </li>
+          <li>
+            <a href=""> <img src="jsimage/animals/3.jpg" alt="" /> </a>
+          </li>
+          <li>
+            <a href=""> <img src="jsimage/animals/4.jpg" alt="" /> </a>
+          </li>
+        </ul>
+      </div>
+      <div class="circles" id="circles"><ol></ol></div>
     </div>
     <script src="jquery.js"></script>
     <script>
-        // let imglist = ['jsimage/animals/0.jpg', 'jsimage/animals/0.jpg', 'jsimage/animals/0.jpg', 'jsimage/animals/0.jpg', 'jsimage/animals/0.jpg']
-        // let picNum = imglist.length
+      // let imglist = ['jsimage/animals/0.jpg', 'jsimage/animals/0.jpg', 'jsimage/animals/0.jpg', 'jsimage/animals/0.jpg', 'jsimage/animals/0.jpg']
+      // let picNum = imglist.length
 
+      var timer;
+      var picNum = jQuery(".movement ul").children().length;
+      jQuery(".movement ul li:first")
+        .clone()
+        .appendTo(".movement ul");
+      var jQuerycarousel = jQuery(".carousel ");
+      var jQuerymovement = jQuery(".carousel .movement");
+      var jQuerybtnLeft = jQuery(".carousel .btns .btnLeft");
+      var jQuerybtnRight = jQuery(".carousel .btns .btnRight");
+      var circleStr = "";
 
-        let timer
+      for (var i = 0; i < picNum; i++) {
+        circleStr += "<li></li>";
+      }
 
-        let picNum = $('.movement ul').children().length;
+      jQuery(".carousel .circles ol").html(circleStr);
+      jQuery(".carousel .circles").css({ width: 28 * picNum + 40 + "px" });
+      var jQuerycircles = jQuery(".carousel .circles ol li");
+      jQuerycircles.eq(0).addClass("cur");
+      var idx = 0;
 
-        $('.movement ul li:first').clone().appendTo('.movement ul');
-        var $carousel = $('.carousel ')
-        var $movement = $('.carousel .movement');
-        var $btnLeft = $('.carousel .btns .btnLeft');
-        var $btnRight = $('.carousel .btns .btnRight');
+      function btnLeftClickhandler() {
+        if (jQuerymovement.is(":animated")) return;
+        idx--;
 
-        let circleStr = ""
-        for (var i = 0; i < picNum; i++) {
-            circleStr += '<li></li>'
+        if (idx < 0) {
+          idx = picNum - 1;
+          jQuerymovement.css("left", picNum * -1130);
         }
-        $('.carousel .circles ol').html(circleStr);
-        var $circles = $('.carousel .circles ol li');
-        $circles.eq(0).addClass('cur');
 
+        jQuerymovement.animate(
+          {
+            left: idx * -1130
+          },
+          500
+        );
+        changeCircles(idx);
+      }
 
+      function btnRightClickhandler() {
+        if (jQuerymovement.is(":animated")) return;
+        idx++;
 
-        var idx = 0;
-        function btnLeftClickhandler() {
-            if ($movement.is(':animated')) return;
-            idx--;
-            if (idx < 0) {
-                idx = picNum - 1;
-                $movement.css('left', picNum * -1130);
+        jQuerymovement.animate(
+          {
+            left: idx * -1130
+          },
+          1000,
+          function() {
+            if (idx > picNum - 1) {
+              idx = 0;
+              jQuerymovement.css("left", 0);
             }
-            $movement.animate({ 'left': idx * -1130 }, 500);
+
             changeCircles(idx);
-        }
-        function btnRightClickhandler() {
-            if ($movement.is(':animated')) return;
-            idx++;
-            $movement.animate({ 'left': idx * -1130 }, 500, function () {
-                if (idx > picNum - 1) {
-                    idx = 0;
-                    $movement.css('left', 0);
-                }
-                changeCircles(idx);
-            })
-        }
-        function circleClickhandler() {
-            if ($movement.is(':animated')) return;
-            var idx = picNum = $(this).index();
-            changeCircles(idx)
-            $movement.css('left', -1130 * idx);
-        }
-        function changeCircles(n) {
-            $circles.removeClass('cur');
-            $circles.eq(n).addClass('cur');
+          }
+        );
+      }
 
-        }
-        $btnLeft.click(btnLeftClickhandler);
-        $btnRight.click(btnRightClickhandler);
-        $circles.click(circleClickhandler);
+      function circleClickhandler() {
+        if (jQuerymovement.is(":animated")) return;
+        idx = jQuery(this).index();
+        changeCircles(idx);
+        jQuerymovement.css("left", -1130 * idx);
+      }
 
-        $carousel.mouseenter(function () {
-            clearInterval(timer);
-        })
-        $carousel.mouseleave(function () {
-            timer = setInterval(function () {
-                btnRightClickhandler();
-            }, 2000);
-        })
+      function changeCircles(n) {
+        jQuerycircles.removeClass("cur");
+        jQuerycircles.eq(n).addClass("cur");
+      }
 
-
-        timer = setInterval(function () {
-            btnRightClickhandler();
+      jQuerybtnLeft.click(btnLeftClickhandler);
+      jQuerybtnRight.click(btnRightClickhandler);
+      jQuerycircles.click(circleClickhandler);
+      jQuerycarousel.mouseenter(function() {
+        clearInterval(timer);
+      });
+      jQuerycarousel.mouseleave(function() {
+        timer = setInterval(function() {
+          btnRightClickhandler();
         }, 2000);
-
-
+      });
+      timer = setInterval(function() {
+        btnRightClickhandler();
+      }, 2000);
     </script>
-</body>
-
+  </body>
 </html>
